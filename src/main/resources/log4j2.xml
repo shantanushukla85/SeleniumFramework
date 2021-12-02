@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="trace">
+	<properties>
+		<property name="pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} | %-5.5p | %msg%n
+		</property>
+		<property name="filename">XXProjectTemplateXX</property>
+		<!-- It will look like that: 2013-04-03 07:37:51.993 | WARN | main | lnetgateway.Server:56 
+			| My app is logging stuff -->
+	</properties>
+	<appenders>
+		<!-- <param name="append" value="false" /> -->
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${pattern}" />
+		</Console>
+		<RollingFile name="RollingFile" fileName="logs/${filename}.log"
+			filePattern="logs/$${date:yyyy-MM}/$${date:yyyy-MM-dd}/${filename}-%d{yyyyMMddHHmmss.SSS}.log">
+			<PatternLayout>
+				<pattern>${pattern}</pattern>
+			</PatternLayout>
+			<Policies>
+				<OnStartupTriggeringPolicy /><!-- Rotated on every test run -->
+				<SizeBasedTriggeringPolicy size="100 MB" /> <!-- Or every 100 MB -->
+			</Policies>
+		</RollingFile>
+	</appenders>
+	<loggers>
+		<root level="debug"> <!-- We log everything -->
+			<appender-ref ref="Console" /> <!-- To console -->
+			<appender-ref ref="RollingFile" /> <!-- And to a rotated file -->
+		</root>
+	</loggers>
+</configuration>

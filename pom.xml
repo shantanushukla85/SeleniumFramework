@@ -1,0 +1,60 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ASC_Automation</groupId>
+	<artifactId>ASC_Automation</artifactId>
+	<version>3.1</version>
+	<name>Desktop</name>
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<plugins>
+  
+			<plugin>
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+<!-- 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+				<configuration>
+					<suiteXmlFiles>
+						TestNG suite XML files
+						<suiteXmlFile>src\main\java\com\stryker\connectedcare\xml\Debug.xml</suiteXmlFile>
+						<suiteXmlFile>src\main\java\com\stryker\connectedcare\xml\Debug.xml</suiteXmlFile>
+					</suiteXmlFiles>
+				</configuration>
+			</plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>main.java.com.stryker.Launch</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+	<dependencies>
+		<!-- Put STAR framework in your local repository -->
+		<dependency>
+		      <groupId>com.stryker</groupId>
+              <artifactId>star</artifactId>
+              <version>3.1.4</version>
+              <scope>system</scope>
+              <systemPath>${basedir}/src/main/resources/star-3.1.4.jar</systemPath>
+		</dependency>
+	</dependencies>
+</project>
