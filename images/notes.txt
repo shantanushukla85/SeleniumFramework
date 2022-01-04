@@ -1,0 +1,5 @@
+TC_Userimg_XPATH=.//span[@class='button-container-a11y']//img[@title='User']
+
+SF_switchtolightening_label_XPATH=.//table[@id='phHeader']//a[.='Switch to Lightning Experience']
+
+TC_Userimg_XPATH=.//span[@class='button-container-a11y']//img[@title='User']
