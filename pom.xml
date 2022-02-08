@@ -52,9 +52,9 @@
 		<dependency>
 		      <groupId>com.stryker</groupId>
               <artifactId>star</artifactId>
-              <version>3.1.4</version>
+              <version>3.1.6</version>
               <scope>system</scope>
-              <systemPath>${basedir}/src/main/resources/star-3.1.4.jar</systemPath>
-		</dependency>
+              <systemPath>${basedir}/src/main/resources/star-3.1.6.jar</systemPath>
+       		</dependency>
 	</dependencies>
 </project>

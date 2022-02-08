@@ -48,6 +48,27 @@ public class LoginSFDC {
 		commonLib.waitForPageToLoad();
 	}
 	
+	public void loginToSFDC(String workbookName, int rowfrom, int rowTo) {
+		try {
+
+			// Fetching Login Testdata
+			List<String> loginData = commonLib.read_Test_Data(workbookName, "Users", rowfrom, rowTo, 2, 3);
+			
+			commonLib.log(LogStatus.INFO, "Login with user: " + loginData.get(0));
+			
+			// Login with admin credentials
+			sfdcLib.login(loginData.get(0), loginData.get(1));
+			commonLib.waitForPageToLoad();
+			commonLib.getScreenshot();
+			commonLib.log(LogStatus.INFO,
+					"Successfully login to " + commonLib.getConfigValue("environment").toUpperCase() + " environment.");
+			//sfdcLib.switchToLightningVesion();
+
+		} catch (InterruptedException | IOException e) {
+			e.printStackTrace();
+		}
+		commonLib.waitForPageToLoad();
+	}
 /////////////////////////////////////////////// NEW METHODS WITH XPATHS ///////////////////////////////////////////////
 public void login(String Username, String Password) throws InterruptedException, IOException {
 commonLib.syso("About to login User: " + Username + " to the SalesForce Application");

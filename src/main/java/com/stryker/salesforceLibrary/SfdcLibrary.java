@@ -26,16 +26,19 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import com.stryker.asc.test.scripts.Opportunities;
 import com.stryker.star.CommonLibrary;
 
 public class SfdcLibrary {
@@ -69,9 +72,15 @@ public class SfdcLibrary {
 		commonLib.sendKeys("SF_loginPage_passWord_XPATH", Password);
 		commonLib.click("SF_loginPage_submitButton_XPATH");
 		commonLib.syso("Login button clicked");
-		commonLib.getDriver().manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-		commonLib.implicitWait(60);
-		commonLib.waitForTitleTimeOut(20);
+		
+		//commonLib.waitforInvisibilityOfElement("SF_ASCSales_loadingStatus_XPATH");
+		commonLib.waitForPresenceOfElementLocated("SF_ASCSales_navigationHeader_XPATH");
+		commonLib.syso("loader disappear");
+		/*
+		 * commonLib.getDriver().manage().timeouts().pageLoadTimeout(60,
+		 * TimeUnit.SECONDS); commonLib.implicitWait(60);
+		 * commonLib.waitForTitleTimeOut(20);
+		 */
 	}
 
 	public String getWorkbookNameWithEnvironment() {
@@ -262,7 +271,7 @@ public class SfdcLibrary {
 			}
 		}
 		if (currentURL.contains("lightning")) {
-			commonLib.waitForPresenceOfElementLocated("SF_Header_StykerLogo_XPATH");
+			//commonLib.waitForPresenceOfElementLocated("SF_Header_StykerLogo_XPATH");
 		} else {
 			commonLib.click("SF_Header_Switch_To_Lightning_XPATH");
 			commonLib.waitForPresenceOfElementLocated("SF_Header_StykerLogo_XPATH");
@@ -634,45 +643,98 @@ public class SfdcLibrary {
 	 * ===============================================
 	 */
 
-	public void search_Profile(String toBeSearched, String xpathOfResult, String keyForWaitDynamicElement,
-			String keyForClickWithDynamic) throws InterruptedException {
+	/*
+	 * public void search_Profile(String toBeSearched, String xpathOfResult, String
+	 * keyForWaitDynamicElement, String keyForClickWithDynamic) throws
+	 * InterruptedException { try {
+	 * commonLib.clickwithoutWait("GlobalSearch_Homepage_XPATH");
+	 * commonLib.sendKeys("GlobalSearch_Homepage_XPATH", toBeSearched);
+	 * Thread.sleep(5 * 1000);
+	 * commonLib.WaitforPresenceofElement_Dynamic_Xpath(xpathOfResult,
+	 * keyForWaitDynamicElement); commonLib.clickWithDynamicValue(xpathOfResult,
+	 * keyForClickWithDynamic); commonLib.waitUntilUrlContains("ManageUsers");
+	 * commonLib.waitForPresenceOfElementLocated("GlobalSearch_Homepage_XPATH");
+	 * commonLib.waitForPageToLoad(); // Thread.sleep(10000); driver =
+	 * commonLib.getDriver();
+	 * commonLib.waitforFramenadSwitch("Profile_login_Frame_XPATH"); int framescnt =
+	 * driver.findElements(By.xpath("//iframe")).size(); commonLib.syso("framescnt:"
+	 * + framescnt); System.out.println("page load completed"); //
+	 * Thread.sleep(10000);
+	 * 
+	 * // driver.switchTo().frame(0);// added
+	 * commonLib.waitForPresenceOfElementLocated("Profile_login_XPATH");
+	 * commonLib.clickwithoutWait("Profile_login_XPATH");
+	 * commonLib.waitUntilUrlContains("home");
+	 * commonLib.waitForPresenceOfElementLocated("GlobalSearch_Homepage_XPATH");
+	 * driver.switchTo().defaultContent(); // added new Thread.sleep(5000);
+	 * commonLib.refreshPage();// added as some times logi profile is not displayed
+	 * by Brahma
+	 * commonLib.waitForPresenceOfElementLocated("Profile_loginMessage_XPATH");//
+	 * Brahma if (validateProfileLogin("Profile_loginMessage_XPATH",
+	 * keyForClickWithDynamic)) { commonLib.log(LogStatus.INFO,
+	 * "User is successfull logged in with " + keyForClickWithDynamic); } else {
+	 * commonLib.log(LogStatus.FAIL, "User is not Logged in With " +
+	 * keyForClickWithDynamic); } } catch (Exception e) { commonLib.syso("No Frame:"
+	 * + e.getMessage()); }
+	 * 
+	 * }
+	 */
+	public void search_Profile(String toBeSearched) throws InterruptedException {
 		try {
-			commonLib.clickwithoutWait("GlobalSearch_Homepage_XPATH");
-			commonLib.sendKeys("GlobalSearch_Homepage_XPATH", toBeSearched);
-			Thread.sleep(5 * 1000);
-			commonLib.WaitforPresenceofElement_Dynamic_Xpath(xpathOfResult, keyForWaitDynamicElement);
-			commonLib.clickWithDynamicValue(xpathOfResult, keyForClickWithDynamic);
-			commonLib.waitUntilUrlContains("ManageUsers");
-			commonLib.waitForPresenceOfElementLocated("GlobalSearch_Homepage_XPATH");
+			commonLib.clickwithoutWait("GlobalSearch_SetupPage_XPATH");
+			Thread.sleep(3000);
+			commonLib.sendKeys("GlobalSearch_SetupPage_XPATH", toBeSearched);
+			commonLib.WaitforPresenceofElement_Dynamic_Xpath("GlobalSearch_ProfileName_XPATH", toBeSearched);
+			Thread.sleep(2000);
+			commonLib.clickwithoutWait("GlobalSearch_SetupPage_XPATH");
+			commonLib.KeyPress_Enter_On_Currently_Focussed_Element_Using_Actions_Class();
+			// commonLib.KeyPress_Tab();
+			KeyPress_Tab_Using_Actions_Class();
+			commonLib.WaitforPresenceofElement_Dynamic_Xpath("ProfileSearchResult_NameLink_XPATH", toBeSearched);
+			commonLib.clickbyjavascriptWithDynamicValue("ProfileSearchResult_NameLink_XPATH", toBeSearched);
+			commonLib.waitForPresenceOfElementLocated("GlobalSearch_SetupPage_XPATH");
 			commonLib.waitForPageToLoad();
-			// Thread.sleep(10000);
+			Thread.sleep(10000);
 			driver = commonLib.getDriver();
+			
 			commonLib.waitforFramenadSwitch("Profile_login_Frame_XPATH");
 			int framescnt = driver.findElements(By.xpath("//iframe")).size();
 			commonLib.syso("framescnt:" + framescnt);
-			System.out.println("page load completed");
-			// Thread.sleep(10000);
+			commonLib.syso("Waiting for the Frame to get loaded for Login Button");
 
+			commonLib.syso("framescnt:" + framescnt);
 			// driver.switchTo().frame(0);// added
 			commonLib.waitForPresenceOfElementLocated("Profile_login_XPATH");
-			commonLib.clickwithoutWait("Profile_login_XPATH");
+			// Thread.sleep(3*1000);
+			commonLib.waitForPresenceOfElementLocated("SearchProfile_PermissionSetButton_Link_XPATH");
+			commonLib.waitForElementToBeClickable("SearchProfile_PermissionSetButton_Link_XPATH");
+			commonLib.waitForElementToBeClickable("Profile_login_XPATH");
+//			commonLib.clickbyjavascript("Home_Page_QuickFind_textbox_XPATH");
+			commonLib.getScreenshot();
+			commonLib.clickbyjavascript("Profile_login_XPATH");
 			commonLib.waitUntilUrlContains("home");
-			commonLib.waitForPresenceOfElementLocated("GlobalSearch_Homepage_XPATH");
-			driver.switchTo().defaultContent(); // added new
-			Thread.sleep(5000);
-			commonLib.refreshPage();// added as some times logi profile is not displayed by Brahma
-			commonLib.waitForPresenceOfElementLocated("Profile_loginMessage_XPATH");// Brahma
-			if (validateProfileLogin("Profile_loginMessage_XPATH", keyForClickWithDynamic)) {
-				commonLib.log(LogStatus.INFO, "User is successfull logged in with " + keyForClickWithDynamic);
-			} else {
-				commonLib.log(LogStatus.FAIL, "User is not Logged in With " + keyForClickWithDynamic);
+//			commonLib.waitForPresenceOfElementLocated("GlobalSearch_Homepage_XPATH");
+			driver.switchTo().defaultContent(); // To switch back to parent window
+			// Logic applied as sometimes Logged in user Name does not comes up.
+			if (commonLib.findElementPresence("Profile_loginMessage_XPATH") == false) {
+				commonLib.refreshPage();
 			}
+			commonLib.waitForPresenceOfElementLocated("Profile_loginMessage_XPATH");
 		} catch (Exception e) {
-			commonLib.syso("No Frame:" + e.getMessage());
+			commonLib.log(LogStatus.FAIL, "User is not Logged in With " + toBeSearched);
+			e.printStackTrace();
 		}
 
 	}
-
+	
+	public void KeyPress_Tab_Using_Actions_Class() {
+		try {
+			Actions action = new Actions(driver);
+			action.sendKeys(Keys.TAB).build().perform();
+		} catch (Exception e) {
+			commonLib.syso("Failed.Not able to press enter using actions class");
+		}
+	}
 	/*
 	 * =============================================================================
 	 * =============================================== Function Name :
@@ -7785,5 +7847,88 @@ public class SfdcLibrary {
 		commonLib.waitForPageToLoad();
 		Thread.sleep(5000);
 	}
+	public void ByVisibleElement(String element) {
+      
+        //WebDriver driver = new FirefoxDriver();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
 
+        WebElement Element = commonLib.findElement(element);
+        // Scrolling down the page till the element is found		
+        js.executeScript("arguments[0].scrollIntoView();", Element);
+    }
+
+
+	public String[] setTestInfo(String workSheet)
+	{
+		String[] testInfo = new String[3];
+		
+		
+		
+		String packageName = Opportunities.class.getPackage().toString();
+		testInfo[1]=packageName;
+		
+		System.out.println("Package name value is " + packageName);
+		System.out.println("Worksheet name value is " + workSheet);
+		String workBook = getWorkbookNameWithEnvironment();
+		testInfo[2]=workBook;
+		System.out.println("Workbook value is " + workBook);
+		
+		return testInfo;
+
+	}
+	
+	/**anshumans
+	click
+	@param field
+	void
+	Jan 4, 2022
+	*/
+	public void click(String field) {
+		
+		try {
+			commonLib.waitForPresenceOfElementLocated(field);
+			commonLib.waitForVisibilityOf(field);
+			commonLib.waitForElementToBeClickable(field);
+			commonLib.findElement(field).click();			
+		}
+		catch (ElementClickInterceptedException e) {
+			System.out.println(e); 
+			commonLib.clickbyjavascript(field);	
+			}	
+		
+		commonLib.log(LogStatus.INFO, field + " clicked");
+		commonLib.getScreenshot();
+	}
+
+
+	/**anshumans
+	clickWithDynamicValue
+	@param field
+	@param key
+	void
+	Jan 4, 2022
+	*/
+	public void clickWithDynamicValue(String field, String key) {
+		try {
+		
+			commonLib.WaitforPresenceofElement_Dynamic_Xpath(field, key);
+			//waitForElementToBeClickable(field);
+			commonLib.findElementWithDynamicXPath(field,key).click();
+			commonLib.syso("Clicked on element: " + field);
+		} 
+		catch (ElementClickInterceptedException e1) {
+			System.out.println(e1); 
+			try {
+			commonLib.clickbyjavascriptWithDynamicValue(field, key);
+			}
+				catch (Exception e) {
+
+					e.printStackTrace();
+					commonLib.reportUtil.log(LogStatus.FAIL, "Not able to click on element"+e);
+				}
+			}
+		
+		commonLib.log(LogStatus.INFO, field + "clicked");
+		commonLib.getScreenshot();
+	}
 }
