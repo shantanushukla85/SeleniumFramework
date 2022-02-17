@@ -134,6 +134,56 @@ public class OpportunitiesPage {
 		commonLib.syso("New opp name is " + accName1);
 		return accName1;
 	}
+	
+	/**
+	 * Method to create New Opportunity providing New Account Name
+	 * @param accountName
+	 * @param stage
+	 * @return
+	 * @throws InterruptedException
+	 * @throws AWTException
+	 */
+	public String createNewOpportunityWithAccountName(String accountName, String stage) throws InterruptedException, AWTException {
+		boolean flag = false;
+		commonLib.waitForPresenceOfElementLocated("SF_New_Oppty_Button_XPATH");
+		commonLib.click("SF_New_Oppty_Button_XPATH");
+		String accName1 = "Test" + System.currentTimeMillis();
+		accName1 = "trinity_oppor" + accName1.substring(accName1.length() - 3);
+		commonLib.sendKeys("SF_ASCSales_oppor_createNewPage_OppNameInput_XPATH", accName1);
+		commonLib.sendKeys("SF_Oppty_Account_Name_XPATH", accountName);
+		commonLib.click("SF_Show_Result_SuggestionBox_XPATH");
+		commonLib.clickbyjavascriptWithDynamicValue("SF_Account_Name_Link_XPATH", accountName);
+		// sfdcLib.click("SF_ASCSales_oppor_createNewPage_searchAcc_XPATH");
+		// sfdcLib.click("span", "title", "GEMINI ASC");
+		String startDate = commonLib.add_Minus_Date(0, "M/dd/yyyy");
+
+		commonLib.sendKeys("SF_ASCSales_oppor_createNewPage_closeDateInput_XPATH", startDate);
+		commonLib.click("SF_ASCSales_oppor_createNewPage_stage_XPATH");
+		commonLib.clickWithDynamicValue("SF_ASCSales_oppor_createNewPage_stageNAme_dynamicText_XPATH", stage);
+
+		commonLib.scroll_view("SF_ASCSales_oppor_createNewPage_hospitalDrDown_XPATH");
+		sfdcLib.click("SF_ASCSales_oppor_createNewPage_hospitalDrDown_XPATH");
+
+		sfdcLib.click("SF_ASCSales_oppor_createForm_hospital_XPATH");
+		sfdcLib.click("SF_ASCSales_generalSave_nameSaveEdit_XPATH");
+
+		flag = verifyElementExist("SF_ASCSales_toastMessageForSuccess_XPATH", "new oppourtunity created");
+		/*
+		 * if (flag) {
+		 * 
+		 * String xpath = "//lightning-formatted-text[text()='" + accName1 + "']"; //
+		 * flag= commonLib.isDisplayed(xpath); flag =
+		 * commonLib.driver.findElement(By.xpath(xpath)).isDisplayed(); if (!flag) {
+		 * commonLib.reportUtil.log(LogStatus.FAIL, "new Opp not created");
+		 * commonLib.getScreenshot(); } else { commonLib.reportUtil.log(LogStatus.PASS,
+		 * "new Opp  created"); commonLib.getScreenshot(); } }
+		 */
+		Thread.sleep(5000);
+		commonLib.log(LogStatus.INFO, "New Opportunity is create with name: " + accName1);
+		commonLib.syso("New opp name is " + accName1);
+		return accName1;
+	}
+
 
 
 	public boolean addContactForOpportunities(String oppName) throws InterruptedException {

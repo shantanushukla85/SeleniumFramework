@@ -33,7 +33,9 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -7930,5 +7932,17 @@ public class SfdcLibrary {
 		
 		commonLib.log(LogStatus.INFO, field + "clicked");
 		commonLib.getScreenshot();
+	}
+	
+	public void waitforInvisibilityOfWE(String field) {
+		try {
+			if (commonLib.isDisplayed(field)) {
+				WebDriverWait wait = new WebDriverWait(commonLib.getDriver(), 90);
+				wait.until(ExpectedConditions.invisibilityOf(commonLib.findElement(field)));
+			}
+
+		} catch (NoSuchElementException e) {
+			//e.printStackTrace();
+		}
 	}
 }
