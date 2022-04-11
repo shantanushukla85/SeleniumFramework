@@ -15,6 +15,7 @@ import java.util.Random;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
@@ -617,6 +618,7 @@ commonLib.scroll_view("SF_ASCSales_account_leftDesirdItems_label_OpportunityProd
  public void logOutFromCurrentUser() throws InterruptedException, IOException
  {
  	//accountAndTerr.sfdcLib.click("SF_ASCSales_viewProfileimg_XPATH");
+	commonLib.waitForElementToBeClickable("TC_Userimg_XPATH");
  	commonLib.performHoverandClick("TC_Userimg_XPATH");
  	sfdcLib.click("SF_ASCSales_viewProfile_logOut_XPATH");
  	commonLib.waitForPresenceOfElementLocated("SF_ASCSales_setUpUserImage_XPATH");
@@ -792,4 +794,24 @@ commonLib.scroll_view("SF_ASCSales_account_leftDesirdItems_label_OpportunityProd
 				verifyElementExistByWait("SF_ASCSales_account_divisionalAccounts_Tab_XPATH", null), " exist",
 				" not exist");
  }
+ 
+ /**
+  * Method to click on Opportunity Name under Accounts Page
+ * @param opptyName
+ */
+public void clickOnOpportunityNameUnderAccountPage(String opptyName) {
+	 try {
+			commonLib.waitForVisibilityOf_DynamicXpath("SF_ASCSales_Oppty_Name_Link_XPATH", opptyName);
+			commonLib.getScreenshot();
+			commonLib.log(LogStatus.INFO, "Opportunity Name " + opptyName + " is visible in the Accounts Page");
+			commonLib.clickWithDynamicValue("SF_ASCSales_Oppty_Name_Link_XPATH", opptyName);
+			commonLib.waitForPageToLoad();
+			commonLib.waitForVisibilityOf_DynamicXpath("SF_ASCSales_Account_Title_XPATH", opptyName);
+			commonLib.getScreenshot();
+			commonLib.log(LogStatus.PASS, "Opportunity Page Opens Successfully");
+		} catch (ElementNotVisibleException e) {
+			commonLib.getScreenshot();
+			commonLib.log(LogStatus.FAIL, "Opportunity Name " + opptyName + " is not visible in the Accounts Page");
+		}
+	} 
 }

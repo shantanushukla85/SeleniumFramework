@@ -7945,4 +7945,42 @@ public class SfdcLibrary {
 			//e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Method to search a record w.r.t 'Record Type' and 'Record Name'
+	 * 
+	 * 
+	 * @param recordType
+	 * @param recordName
+	 * 
+	 **/
+	public void einsteinSearch(String recordType, String recordName) {
+		try {
+			commonLib.waitForPageToLoad();
+			commonLib.waitForVisibilityOf("Einstein_Search_Button_XPATH");
+			Thread.sleep(5000);
+			commonLib.waitForElementToBeClickable("Einstein_Search_Button_XPATH");
+			commonLib.clickbyjavascript("Einstein_Search_Button_XPATH");
+
+			commonLib.waitForVisibilityOf("ES_Dropdown_XPATH");
+			commonLib.waitForElementToBeClickable("ES_Dropdown_XPATH");
+			commonLib.clickbyjavascript("ES_Dropdown_XPATH");
+
+			Thread.sleep(5000);
+			commonLib.clickbyjavascriptWithDynamicValue("ES_Dropdown_List_XPATH", recordType);
+			commonLib.log(LogStatus.INFO, "Successfully selected Search dropdown value: " + recordType);
+			commonLib.syso("Successfully selected Search dropdown value: " + recordType);
+
+			commonLib.clear("ES_Placeholder_XPATH");
+			commonLib.sendKeys("ES_Placeholder_XPATH", recordName);
+			commonLib.WaitforPresenceofElement_Dynamic_Xpath("ES_Search_Suggestions_XPATH", recordName);
+			commonLib.clickbyjavascriptWithDynamicValue("ES_Search_Suggestions_XPATH", recordName);
+			commonLib.log(LogStatus.INFO, "Successfully selected " + recordType + ":" + recordName);
+
+		} catch (Exception e) {
+			commonLib.log(LogStatus.FAIL, "Unable to search the desired " + recordType + ":" + recordName);
+			e.printStackTrace();
+		}
+
+	}
 }

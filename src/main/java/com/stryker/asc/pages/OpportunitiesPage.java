@@ -623,4 +623,46 @@ public class OpportunitiesPage {
 			sfdcLib.click("SF_ASCSales_oppor_closeButtonFor_activityMouseHoverPopUp_XPATH");
 		}
 	}
+	
+	public void createNewOpptyFromAccount() {
+		commonLib.waitForPresenceOfElementLocated("SF_Opportunites_Expander_Button_XPATH");
+		commonLib.click("SF_Opportunites_Expander_Button_XPATH");
+		commonLib.waitForVisibilityOf("SF_New_Oppty_Button_XPATH");
+		commonLib.getScreenshot();
+		commonLib.log(LogStatus.INFO, "New Opportunity button is displayed");
+		commonLib.click("SF_New_Oppty_Button_XPATH");
+		
+	}
+	
+	public void clickOnTabOpportunityTabs() {
+		
+	}
+	
+	public void updateOpportynityStageValue(String stageName) {
+		try {
+		commonLib.waitForElementToBeClickable_Dynamic("SF_ASCSales_opporTabName_XPATH", "Details");
+		commonLib.clickWithDynamicValue("SF_ASCSales_opporTabName_XPATH", "Details");
+		commonLib.performHoverandClickDynamic("SF_ASCSales_opporTabName_XPATH", "Details");
+		commonLib.log(LogStatus.INFO, "Clicked successfully on Detail Tab");
+		Thread.sleep(2000);		
+		commonLib.waitForElementToBeClickable("SF_ASCSales_opporEditStage_Button_XPATH");
+		commonLib.click("SF_ASCSales_opporEditStage_Button_XPATH");		
+		commonLib.waitForVisibilityOf("SF_ASCSales_Oppty_Save_Button_XPATH");
+		commonLib.waitForElementToBeClickable("SF_ASCSales_Stage_Dropdown_Button_XPATH");
+		commonLib.click("SF_ASCSales_Stage_Dropdown_Button_XPATH");
+		commonLib.waitForElementToBeClickable_Dynamic("SF_ASCSales_Stage_Dropdown_Value_XPATH", stageName);
+		commonLib.clickWithDynamicValue("SF_ASCSales_Stage_Dropdown_Value_XPATH", stageName);
+		commonLib.log(LogStatus.INFO, "Successfully updated opportunity stage value to: "+stageName);
+		commonLib.getScreenshot();
+		commonLib.click("SF_ASCSales_Oppty_Save_Button_XPATH");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
 }
