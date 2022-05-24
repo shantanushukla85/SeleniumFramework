@@ -13,6 +13,8 @@ import com.stryker.asc.pages.AccountManagementSamplePage;
 import com.stryker.common.modules.LoginSFDC;
 import com.stryker.salesforceLibrary.SfdcLibrary;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class Quote_ProposalSetup extends com.stryker.driver.SfdcDriver {
 
 	private com.stryker.salesforceLibrary.SfdcLibrary sfdcLib;
@@ -552,6 +554,9 @@ public class Quote_ProposalSetup extends com.stryker.driver.SfdcDriver {
 					commonLib.startTest(testCaseID);
 					commonLib.log(LogStatus.INFO, testCaseID + "164746 / 202782 - This is to validated that quote stages impacts opportunity stages (WITHOUT Flex)");
 					login.loginToSFDC(workBook, 2, 2);
+					accountAndTerr.clickAppFromHeader("Accounts");
+					accountAndTerr.searchAccountByNameFromAccountPage("Test_Automation_Account_New");
+				
 					accountAndTerr.clickAppFromHeader("Opportunities");
 					newOppName = oppor.createNewOpportunityWithAccountName("Test_Automation_Account",
 							"Customer Assesment");
@@ -559,6 +564,8 @@ public class Quote_ProposalSetup extends com.stryker.driver.SfdcDriver {
 					quote.switchtoFrameUnderCPQScreen();
 					quote.updateQuoteDescription("Test Description");
 					quote.addQuoteLine("0747031510");
+					quote.clickOnCPQQuoteOperationsButton("Save");
+					quote.clickOnCPQQuoteOperationsButton("Return to Opportunity");
 					quote.clickOnCPQQuoteOperationsButton("Save");
 					//Below test step is not working currently so commenting it out
 //					quote.clickQuoteTransactionLink("Transaction Details");	
@@ -641,5 +648,7 @@ public class Quote_ProposalSetup extends com.stryker.driver.SfdcDriver {
 			}
 		}
 	}
+	
+	
 
 }

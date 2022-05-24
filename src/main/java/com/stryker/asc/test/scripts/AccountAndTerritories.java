@@ -23,7 +23,8 @@ public class AccountAndTerritories extends com.stryker.driver.SfdcDriver {
 	OpportunitiesPage oppor = new OpportunitiesPage(commonLib);
 	String workSheet = "scripts";
 	boolean exist = false;
-public String newOppName;
+    public String newOppName;
+   
 	public AccountAndTerritories() {
 
 		this.sfdcLib = new SfdcLibrary(commonLib);
@@ -32,7 +33,7 @@ public String newOppName;
 
 	}
 
-	//@Test(priority = 0)
+	@Test(priority = 0)
 	public void AccountAndTerritories_227835_TC_01() throws Exception {
 
 		String testCaseID = new Object() {
@@ -90,9 +91,9 @@ public String newOppName;
 
 				accountAndTerr.searchAccountByNameFromAccountPage("GEMINI ASC");
 
-			accountAndTerr.accountDetailsPageVerification();
+			   accountAndTerr.accountDetailsPageVerification();
 
-			commonLib.scroll_view("SF_ASCSales_account_opportunityProduct_XPATH");
+			   commonLib.scroll_view("SF_ASCSales_account_opportunityProduct_XPATH");
 				
 				commonLib.scroll(0, 600);
 				commonLib.scroll(0, -600);
