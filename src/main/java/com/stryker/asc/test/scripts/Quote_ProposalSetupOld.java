@@ -15,7 +15,7 @@ import com.stryker.salesforceLibrary.SfdcLibrary;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class Quote_ProposalSetup extends com.stryker.driver.SfdcDriver {
+public class Quote_ProposalSetupOld extends com.stryker.driver.SfdcDriver {
 
 	private com.stryker.salesforceLibrary.SfdcLibrary sfdcLib;
 
@@ -30,7 +30,7 @@ public class Quote_ProposalSetup extends com.stryker.driver.SfdcDriver {
 	boolean exist = false;
 	public String newOppName;
 
-	public Quote_ProposalSetup() {
+	public Quote_ProposalSetupOld() {
 
 		this.sfdcLib = new SfdcLibrary(commonLib);
 		login = new LoginSFDC(commonLib);

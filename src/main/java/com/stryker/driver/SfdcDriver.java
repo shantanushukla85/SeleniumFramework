@@ -26,7 +26,7 @@ public class SfdcDriver {
 	public CommonLibrary commonLib;
 	public static final String configFileName = "config";
 	public static final String locatorFileName = "LocatorFileName";
-	public static final String ReportFileName = "ACS_Automation_Report";
+	public static final String ReportFileName = "ASC_Automation_Report";
 	public SoftAssert softAssert;	
 	SfdcLibrary sfdcLib;
 	static Map<Integer, List<String>> summaryResult=new HashMap<>();

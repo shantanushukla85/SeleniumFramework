@@ -814,4 +814,15 @@ public void clickOnOpportunityNameUnderAccountPage(String opptyName) {
 			commonLib.log(LogStatus.FAIL, "Opportunity Name " + opptyName + " is not visible in the Accounts Page");
 		}
 	} 
+
+
+public void clickOnNew() {
+	try {
+		commonLib.clickWithDynamicValue("Click_NEw_XPATH", "New");
+		
+	}catch(Exception e){
+		
+		
+	}
+}
 }

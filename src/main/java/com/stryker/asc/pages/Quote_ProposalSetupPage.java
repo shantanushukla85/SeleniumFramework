@@ -55,7 +55,7 @@ public class Quote_ProposalSetupPage {
 			}
 			Thread.sleep(2000);
 		}
-	//	commonLib.clickbyjavascript("SF_Oppty_Quote_Expander_Button_XPATH");
+		// commonLib.clickbyjavascript("SF_Oppty_Quote_Expander_Button_XPATH");
 		commonLib.performHover("SF_Oppty_Quote_Expander_Button_XPATH");
 		Thread.sleep(3000);
 		commonLib.click("SF_Oppty_Quote_Expander_Button_XPATH");
@@ -70,13 +70,59 @@ public class Quote_ProposalSetupPage {
 
 	}
 
-	public void switchtoFrameUnderCPQScreen() {
-		if (commonLib.waitForPresenceOfElementLocated("SF_External_WebPage_Frame_XPATH")) {
-			commonLib.waitforFramenadSwitch("SF_External_WebPage_Frame_XPATH");
-		} else {
-			commonLib.waitforFramenadSwitch("SF_Accessibility_Frame_XPATH");
+	public void clickOnCreateQuote() {
+		commonLib.waitForVisibilityOf("SF_Create_Quote_Button_XPATH");
+		commonLib.click("SF_Create_Quote_Button_XPATH");
+		sfdcLib.waitforInvisibilityOfWE("SVMX_Loading_Spinner_XPATH");
+		commonLib.getScreenshot();
+		commonLib.log(LogStatus.INFO, "CPQ Quote screen is displayed");
+		commonLib.waitForPageToLoad();
 
+	}
+
+	/**
+	 * Method to click on Quote Number under Realted List Screen
+	 * 
+	 * @param quoteNumber
+	 */
+	public void clickOnQuoteNumberUnderOpportunityPage() {
+		try {
+			for (int i = 0; i < 5; i++) {
+				commonLib.scroll(0, 300);
+				if (commonLib.waitForVisibilityOf_DynamicXpath("SF_Quotes_Header_Under_Oppty_XPATH", "h2")) {
+					break;
+				}
+			}
+			// commonLib.scrollDownToElement("SF_Quotes_Header_Under_Oppty_XPATH", "h2");
+			Thread.sleep(2000);
+			commonLib.log(LogStatus.INFO, "Quotes Related List is displayed");
+			boolean bol = commonLib.waitForVisibilityOf("SF_Quote_Link_Under_Oppty_Page_XPATH");
+
+			if (bol) {
+				commonLib.log(LogStatus.INFO, "Quotes are available under Related List screen");
+				commonLib.getScreenshot();
+				commonLib.click("SF_Quote_Link_Under_Oppty_Page_XPATH");
+				commonLib.waitForPageToLoad();
+			} else {
+				commonLib.log(LogStatus.INFO, "Quotes are not available");
+			}
+
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
+	}
+
+	public void switchtoFrameUnderCPQScreen() {
+//		if (commonLib.waitForPresenceOfElementLocated("SF_External_WebPage_Frame_XPATH")) {
+//			commonLib.waitforFramenadSwitch("SF_External_WebPage_Frame_XPATH");
+//		} else {
+//			commonLib.waitforFramenadSwitch("SF_Accessibility_Frame_XPATH");
+//
+//		}
+		commonLib.waitforFramenadSwitch("SF_Accessibility_Frame_XPATH");
+		// commonLib.waitforFramenadSwitch("SF_Session_Frame_XPATH");
 		commonLib.waitforFramenadSwitch("SF_Canvas_Frame_XPATH");
 		commonLib.waitforFramenadSwitch("SF_Oracle_CPQ_Cloud_XPATH");
 
@@ -223,8 +269,10 @@ public class Quote_ProposalSetupPage {
 				commonLib.getScreenshot();
 				commonLib.clickWithDynamicValue("SF_CP_Quote_Operation_Button_XPATH", buttonName);
 				commonLib.log(LogStatus.PASS, "Clicked successfully on " + buttonName + " button");
+				Thread.sleep(1000);
+				commonLib.waitForVisibilityOf("SF_Quote_Processing_Scroll_XPATH");
 				commonLib.waitForPageToLoad();
-				Thread.sleep(9000);
+
 			} else {
 				commonLib.getScreenshot();
 				commonLib.log(LogStatus.FAIL, buttonName + " is not visible");
@@ -233,14 +281,11 @@ public class Quote_ProposalSetupPage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	public void cickOnEditQuote(String quoteNumber) {
 		try {
 			commonLib.scroll_view_Dynamic("SF_Edit_Quote_Expander_Button_XPATH", quoteNumber);
-			// commonLib.scrollDownToElement("SF_Oppty_Quote_Expander_Button_XPATH",
-			// "Expander");
 			commonLib.waitForElementToBeClickable_Dynamic("SF_Edit_Quote_Expander_Button_XPATH", quoteNumber);
 			commonLib.clickWithDynamicValue("SF_Edit_Quote_Expander_Button_XPATH", quoteNumber);
 			Thread.sleep(3000);
@@ -286,7 +331,10 @@ public class Quote_ProposalSetupPage {
 			commonLib.log(LogStatus.INFO, "Part Number value got entered");
 			commonLib.getScreenshot();
 			commonLib.click("SF_Quick_Add_Ok_Button_XPATH");
-			sfdcLib.waitforInvisibilityOfWE("SVMX_Loading_Spinner_XPATH");
+			commonLib.waitForPageToLoad();
+			Thread.sleep(5000);
+			commonLib.waitForVisibilityOf("SF_Quote_Line_View_Button_XPATH");
+			commonLib.scrollDownToElement("SF_Quote_Line_View_Button_XPATH", "button");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -492,11 +540,11 @@ public class Quote_ProposalSetupPage {
 	 * Method to fetch ASP Price Value
 	 * 
 	 * @return
-	 * @throws AWTException 
+	 * @throws AWTException
 	 */
 
 	public String verifyASPPriceValue() throws AWTException {
-	
+
 		for (int i = 0; i < 8; i++) {
 			commonLib.scroll(0, 200);
 			if (commonLib.waitForVisibilityOf_DynamicXpath("SF_ASP_Price_Value_XPATH", "span")) {
@@ -512,6 +560,115 @@ public class Quote_ProposalSetupPage {
 			commonLib.getScreenshot();
 		}
 		return ASPtext;
+	}
+
+	public void verifyQuoteDetailsFieldValues(String fieldName) {
+		boolean field = commonLib.findElementWithDynamicXPath("SF_Quote_Details_Field_Name_XPATH", fieldName)
+				.isDisplayed();
+
+		if (field) {
+			commonLib.log(LogStatus.PASS, "Field Name: '" + fieldName + "' is displayed under Quote Details screen");
+
+		} else {
+			commonLib.log(LogStatus.FAIL,
+					"Field Name: '" + fieldName + "' is not displayed under Quote Details screen");
+			commonLib.getScreenshot();
+		}
+	}
+
+	/**
+	 * Method to enter Year Values under various Years Columns of Parts table
+	 * 
+	 * @param yearNum
+	 * @param value
+	 */
+	public void enterYearValueforLineItem(String yearNum, String value) {
+		try {
+			for (int i = 0; i <= 5; i++) {
+				commonLib.scroll(550, 0);
+				commonLib.scrollDownToElement("SF_Quote_Year7_Header_XPATH", "div");
+				commonLib.scroll_view_Dynamic("SF_Quote_Year_Cell_XPATH", yearNum);
+				boolean bol = commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Year_Cell_XPATH", yearNum);
+				if (bol) {
+					break;
+				}
+			}
+			// commonLib.performHoverandClickDynamic("SF_Quote_Year_Input_XPATH", yearNum);
+			commonLib.clickbyjavascriptWithDynamicValue("SF_Quote_Year_Cell_XPATH", yearNum);
+			commonLib.clickWithDynamicValue("SF_Quote_Year_Cell_XPATH", yearNum);
+			Thread.sleep(2000);
+			// commonLib.clear_DynamicValue("SF_Quote_Year_Input_XPATH", yearNum);
+			commonLib.sendKeys_DynamicValue("SF_Quote_Year_Input_XPATH", yearNum, value);
+
+		} catch (Exception e) {
+			commonLib.getScreenshot();
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Method to expand mass update section
+	 * 
+	 * @param yearNum
+	 * @param value
+	 */
+	public void expandMassUpdatedSection() {
+		try {
+			Thread.sleep(1000);
+			commonLib.waitForVisibilityOf("SF_Quote_Mass_Update_Section_XPATH");
+			commonLib.scrollDownToElement("SF_Quote_Mass_Update_Section_XPATH", "header");
+			commonLib.click("SF_Quote_Mass_Update_Section_XPATH");
+			commonLib.waitForPageToLoad();
+			commonLib.scroll_view_Dynamic("SF_Quote_Field_Label_Name_XPATH", "Sell or Place");
+			commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Field_Label_Name_XPATH", "Sell or Place");
+			commonLib.getScreenshot();
+			commonLib.log(LogStatus.INFO, "Mass Updates Section is Expanded");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Method to verify field names under Quote screen
+	 * 
+	 * @param fieldName
+	 * @return
+	 */
+	public String verifyFieldLabelNames(String fieldName) {
+		String labelName = commonLib.getText("SF_Quote_Field_Label_Name_XPATH", fieldName);
+		return labelName;
+	}
+
+	public String verifyQuoteStatusValue() throws AWTException {
+       // commonLib.scroll("UP");
+		commonLib.scrollDownToElement("SF_Quote_Status_XPATH", "input-text");
+		String value = commonLib.getAttribute("SF_Quote_Status_XPATH", "value");
+		commonLib.getScreenshot();
+		commonLib.log(LogStatus.INFO, "Quote Status Value is: " + value);
+		return value;
+	}
+	
+	public void selectIDINValue(String idinvalue) {
+		try {
+			commonLib.scrollDownToElement("SF_Quote_Mass_Update_Section_XPATH", "h3");
+			Thread.sleep(1000);
+		    commonLib.performHoverandClick("SF_Quote_Select_IDN_Dropdown_Arrow_XPATH");		
+			Thread.sleep(1000);
+			commonLib.clickWithDynamicValue("SF_Quote_IDIN_Value_XPATH", idinvalue);
+			Thread.sleep(3000);
+			commonLib.click("SF_Quote_Update_IDIN_XPATH");
+			commonLib.waitForVisibilityOf("SF_Quote_Processing_Scroll_XPATH");
+			commonLib.waitForPageToLoad();
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }
