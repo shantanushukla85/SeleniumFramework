@@ -44,7 +44,7 @@ import com.stryker.asc.test.scripts.Opportunities;
 import com.stryker.star.CommonLibrary;
 
 public class SfdcLibrary {
-	
+
 	public WebDriver driver;
 	public ExtentReports extent;
 	public ExtentTest test;
@@ -74,8 +74,8 @@ public class SfdcLibrary {
 		commonLib.sendKeys("SF_loginPage_passWord_XPATH", Password);
 		commonLib.click("SF_loginPage_submitButton_XPATH");
 		commonLib.syso("Login button clicked");
-		
-		//commonLib.waitforInvisibilityOfElement("SF_ASCSales_loadingStatus_XPATH");
+
+		// commonLib.waitforInvisibilityOfElement("SF_ASCSales_loadingStatus_XPATH");
 		commonLib.waitForPresenceOfElementLocated("SF_ASCSales_navigationHeader_XPATH");
 		commonLib.syso("loader disappear");
 		/*
@@ -273,7 +273,7 @@ public class SfdcLibrary {
 			}
 		}
 		if (currentURL.contains("lightning")) {
-			//commonLib.waitForPresenceOfElementLocated("SF_Header_StykerLogo_XPATH");
+			// commonLib.waitForPresenceOfElementLocated("SF_Header_StykerLogo_XPATH");
 		} else {
 			commonLib.click("SF_Header_Switch_To_Lightning_XPATH");
 			commonLib.waitForPresenceOfElementLocated("SF_Header_StykerLogo_XPATH");
@@ -698,7 +698,7 @@ public class SfdcLibrary {
 			commonLib.waitForPageToLoad();
 			Thread.sleep(10000);
 			driver = commonLib.getDriver();
-			
+
 			commonLib.waitforFramenadSwitch("Profile_login_Frame_XPATH");
 			int framescnt = driver.findElements(By.xpath("//iframe")).size();
 			commonLib.syso("framescnt:" + framescnt);
@@ -728,7 +728,7 @@ public class SfdcLibrary {
 		}
 
 	}
-	
+
 	public void KeyPress_Tab_Using_Actions_Class() {
 		try {
 			Actions action = new Actions(driver);
@@ -737,6 +737,7 @@ public class SfdcLibrary {
 			commonLib.syso("Failed.Not able to press enter using actions class");
 		}
 	}
+
 	/*
 	 * =============================================================================
 	 * =============================================== Function Name :
@@ -7849,91 +7850,82 @@ public class SfdcLibrary {
 		commonLib.waitForPageToLoad();
 		Thread.sleep(5000);
 	}
+
 	public void ByVisibleElement(String element) {
-      
-        //WebDriver driver = new FirefoxDriver();
-        JavascriptExecutor js = (JavascriptExecutor) driver;
 
-        WebElement Element = commonLib.findElement(element);
-        // Scrolling down the page till the element is found		
-        js.executeScript("arguments[0].scrollIntoView();", Element);
-    }
+		// WebDriver driver = new FirefoxDriver();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 
+		WebElement Element = commonLib.findElement(element);
+		// Scrolling down the page till the element is found
+		js.executeScript("arguments[0].scrollIntoView();", Element);
+	}
 
-	public String[] setTestInfo(String workSheet)
-	{
+	public String[] setTestInfo(String workSheet) {
 		String[] testInfo = new String[3];
-		
-		
-		
+
 		String packageName = Opportunities.class.getPackage().toString();
-		testInfo[1]=packageName;
-		
+		testInfo[1] = packageName;
+
 		System.out.println("Package name value is " + packageName);
 		System.out.println("Worksheet name value is " + workSheet);
 		String workBook = getWorkbookNameWithEnvironment();
-		testInfo[2]=workBook;
+		testInfo[2] = workBook;
 		System.out.println("Workbook value is " + workBook);
-		
+
 		return testInfo;
 
 	}
-	
-	/**anshumans
-	click
-	@param field
-	void
-	Jan 4, 2022
-	*/
+
+	/**
+	 * anshumans click
+	 * 
+	 * @param field void Jan 4, 2022
+	 */
 	public void click(String field) {
-		
+
 		try {
 			commonLib.waitForPresenceOfElementLocated(field);
 			commonLib.waitForVisibilityOf(field);
 			commonLib.waitForElementToBeClickable(field);
-			commonLib.findElement(field).click();			
+			commonLib.findElement(field).click();
+		} catch (ElementClickInterceptedException e) {
+			System.out.println(e);
+			commonLib.clickbyjavascript(field);
 		}
-		catch (ElementClickInterceptedException e) {
-			System.out.println(e); 
-			commonLib.clickbyjavascript(field);	
-			}	
-		
+
 		commonLib.log(LogStatus.INFO, field + " clicked");
 		commonLib.getScreenshot();
 	}
 
-
-	/**anshumans
-	clickWithDynamicValue
-	@param field
-	@param key
-	void
-	Jan 4, 2022
-	*/
+	/**
+	 * anshumans clickWithDynamicValue
+	 * 
+	 * @param field
+	 * @param key   void Jan 4, 2022
+	 */
 	public void clickWithDynamicValue(String field, String key) {
 		try {
-		
-			commonLib.WaitforPresenceofElement_Dynamic_Xpath(field, key);
-			//waitForElementToBeClickable(field);
-			commonLib.findElementWithDynamicXPath(field,key).click();
-			commonLib.syso("Clicked on element: " + field);
-		} 
-		catch (ElementClickInterceptedException e1) {
-			System.out.println(e1); 
-			try {
-			commonLib.clickbyjavascriptWithDynamicValue(field, key);
-			}
-				catch (Exception e) {
 
-					e.printStackTrace();
-					commonLib.reportUtil.log(LogStatus.FAIL, "Not able to click on element"+e);
-				}
+			commonLib.WaitforPresenceofElement_Dynamic_Xpath(field, key);
+			// waitForElementToBeClickable(field);
+			commonLib.findElementWithDynamicXPath(field, key).click();
+			commonLib.syso("Clicked on element: " + field);
+		} catch (ElementClickInterceptedException e1) {
+			System.out.println(e1);
+			try {
+				commonLib.clickbyjavascriptWithDynamicValue(field, key);
+			} catch (Exception e) {
+
+				e.printStackTrace();
+				commonLib.reportUtil.log(LogStatus.FAIL, "Not able to click on element" + e);
 			}
-		
+		}
+
 		commonLib.log(LogStatus.INFO, field + "clicked");
 		commonLib.getScreenshot();
 	}
-	
+
 	public void waitforInvisibilityOfWE(String field) {
 		try {
 			if (commonLib.isDisplayed(field)) {
@@ -7942,10 +7934,10 @@ public class SfdcLibrary {
 			}
 
 		} catch (NoSuchElementException e) {
-			//e.printStackTrace();
+			// e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Method to search a record w.r.t 'Record Type' and 'Record Name'
 	 * 
@@ -7983,4 +7975,31 @@ public class SfdcLibrary {
 		}
 
 	}
+
+	public String getAttributeDynamic(String field, String key, String attributeName) {
+		String localText = null;
+		System.out.println("Getting the Attribute " + attributeName + " for passed element");
+		localText = commonLib.findElementWithDynamicXPath(field, key).getAttribute(attributeName);
+		return localText;
+	}
+
+	public void verifyAbsenceDynamic(String field, String key) throws InterruptedException {
+		WebElement webElement = commonLib.findElementWithDynamicXPath(field, key);
+		boolean element = webElement.isDisplayed();
+		if (element == false) {
+			commonLib.log(LogStatus.PASS, key + "  is not visible");
+
+		} else {
+			commonLib.log(LogStatus.FAIL, key + "  is visible");
+		}
+	}
+	
+	
+	public void KeyPress_UpKey(String hoverElement) throws AWTException{
+		WebElement hover = commonLib.findElement(hoverElement);
+		Actions builder = new Actions(driver);
+		builder.keyUp(hover, Keys.ARROW_UP).build().perform();
+	}
+
+
 }

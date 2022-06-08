@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
@@ -24,6 +25,18 @@ import com.stryker.star.CommonLibrary;
  */
 /**
  * @author anshumans
+ *
+ */
+/**
+ * @author SHANTANUS5
+ *
+ */
+/**
+ * @author SHANTANUS5
+ *
+ */
+/**
+ * @author SHANTANUS5
  *
  */
 public class Quote_ProposalSetupPage {
@@ -70,6 +83,9 @@ public class Quote_ProposalSetupPage {
 
 	}
 
+	/**
+	 * Method to click on Create Quote screen
+	 */
 	public void clickOnCreateQuote() {
 		commonLib.waitForVisibilityOf("SF_Create_Quote_Button_XPATH");
 		commonLib.click("SF_Create_Quote_Button_XPATH");
@@ -81,36 +97,65 @@ public class Quote_ProposalSetupPage {
 	}
 
 	/**
+	 * Method to click on Edit button under Quote Details screen
+	 */
+	public void clickOnEditQuoteButton() {
+		commonLib.waitForVisibilityOf("SF_Edit_Button_XPATH");
+		commonLib.click("SF_Edit_Button_XPATH");
+		sfdcLib.waitforInvisibilityOfWE("SVMX_Loading_Spinner_XPATH");
+		commonLib.getScreenshot();
+		commonLib.log(LogStatus.INFO, "Edit CPQ Quote screen is displayed");
+		commonLib.waitForPageToLoad();
+
+	}
+
+	/**
 	 * Method to click on Quote Number under Realted List Screen
 	 * 
 	 * @param quoteNumber
+	 * @throws InterruptedException
 	 */
-	public void clickOnQuoteNumberUnderOpportunityPage() {
-		try {
-			for (int i = 0; i < 5; i++) {
-				commonLib.scroll(0, 300);
-				if (commonLib.waitForVisibilityOf_DynamicXpath("SF_Quotes_Header_Under_Oppty_XPATH", "h2")) {
-					break;
-				}
-			}
-			// commonLib.scrollDownToElement("SF_Quotes_Header_Under_Oppty_XPATH", "h2");
-			Thread.sleep(2000);
-			commonLib.log(LogStatus.INFO, "Quotes Related List is displayed");
-			boolean bol = commonLib.waitForVisibilityOf("SF_Quote_Link_Under_Oppty_Page_XPATH");
+	public void clickOnQuoteNumberUnderOpportunityPage() throws InterruptedException {
+		// commonLib.waitForPresenceOfElementLocated("SF_Quote_Link_Under_Oppty_Page_XPATH");
 
-			if (bol) {
-				commonLib.log(LogStatus.INFO, "Quotes are available under Related List screen");
-				commonLib.getScreenshot();
-				commonLib.click("SF_Quote_Link_Under_Oppty_Page_XPATH");
-				commonLib.waitForPageToLoad();
-			} else {
-				commonLib.log(LogStatus.INFO, "Quotes are not available");
-			}
+		commonLib.clickbyjavascript("SF_Quote_Link_Under_Oppty_Page_XPATH");
+		commonLib.getScreenshot();
+		Thread.sleep(1000);
+//		if(commonLib.waitForVisibilityOf("SF_Quote_Link_Under_Oppty_Page_XPATH")) {
+//			commonLib.clickbyjavascript("SF_Quote_Link_Under_Oppty_Page_XPATH");	
+//			commonLib.getScreenshot();
+//			commonLib.log(LogStatus.INFO, "Clicked successfully on the quote under Related List screen");
+//		}else {
+//			commonLib.getScreenshot();
+//			commonLib.log(LogStatus.INFO, "Quotes are not available under Related List screen");
+//		}
+//		
 
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			for (int i = 0; i < 5; i++) {
+//				commonLib.scroll(0, 450);				
+//				if (commonLib.waitForVisibilityOf("SF_Quotes_Header_Under_Oppty_XPATH")){
+//					break;
+//				}
+//			}
+//			// commonLib.scrollDownToElement("SF_Quotes_Header_Under_Oppty_XPATH", "h2");
+//			Thread.sleep(2000);
+//			commonLib.log(LogStatus.INFO, "Quotes Related List is displayed");
+//			boolean bol = commonLib.waitForVisibilityOf("SF_Quote_Link_Under_Oppty_Page_XPATH");
+//
+//			if (bol) {
+//				commonLib.log(LogStatus.INFO, "Quotes are available under Related List screen");
+//				commonLib.getScreenshot();
+//				commonLib.click("SF_Quote_Link_Under_Oppty_Page_XPATH");
+//				commonLib.waitForPageToLoad();
+//			} else {
+//				commonLib.log(LogStatus.INFO, "Quotes are not available");
+//			}
+//
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 	}
 
@@ -226,15 +271,34 @@ public class Quote_ProposalSetupPage {
 		commonLib.getScreenshot();
 	}
 
+//	public void clickOnQuoteNumber(String quoteNumber) {
+//		commonLib.waitForPageToLoad();
+//		JavascriptExecutor jse = (JavascriptExecutor)commonLib.getDriver();
+//		jse.executeScript("window.scrollBy(0,350)", "");
+//		//commonLib.scrollDownToElement("SF_Quotes_Header_Under_Oppty_XPATH", "a");
+//		commonLib.scroll_view_Dynamic("SF_Quote_Number_Link_XPATH", quoteNumber);
+//		boolean bol = commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Number_Link_XPATH", quoteNumber);
+//		if (bol) {
+//			commonLib.getScreenshot();
+//			commonLib.clickbyjavascriptWithDynamicValue("SF_Quote_Number_Link_XPATH", quoteNumber);
+//			//commonLib.clickWithDynamicValue("SF_Quote_Number_Link_XPATH", quoteNumber);
+//			commonLib.log(LogStatus.PASS, "Clicked successfully on Quote Number Link");
+//		} else {
+//			commonLib.log(LogStatus.FAIL, "Quote Number is not available");
+//		}
+//	}
+
 	public void clickOnQuoteNumber(String quoteNumber) {
-		boolean bol = commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Number_Link_XPATH", quoteNumber);
-		if (bol) {
-			commonLib.getScreenshot();
-			commonLib.clickWithDynamicValue("SF_Quote_Number_Link_XPATH", quoteNumber);
+		try {
+			commonLib.waitForPageToLoad();
+			commonLib.scroll_view_Dynamic("SF_Quote_Number_Link_XPATH", quoteNumber);
+			commonLib.clickbyjavascriptWithDynamicValue("SF_Quote_Number_Link_XPATH", quoteNumber);
 			commonLib.log(LogStatus.PASS, "Clicked successfully on Quote Number Link");
-		} else {
-			commonLib.log(LogStatus.FAIL, "Quote Number is not available");
+		} catch (Exception e) {
+			commonLib.getScreenshot();
+			commonLib.log(LogStatus.FAIL, "Quote Number: " + quoteNumber + " is not available");
 		}
+
 	}
 
 	public void clickOnCloneQuote() {
@@ -283,6 +347,23 @@ public class Quote_ProposalSetupPage {
 		}
 	}
 
+	public void verifyPresenceOfOperationButton(String actionName) {
+		try {
+			commonLib.KeyPress_pageUp();
+
+			boolean bol = commonLib.waitForVisibilityOf_DynamicXpath("SF_CP_Quote_Operation_Button_XPATH", actionName);
+			if (bol) {
+				commonLib.log(LogStatus.PASS, actionName + "  is available to the user");
+
+			} else {
+				commonLib.log(LogStatus.FAIL, actionName + "  is not available to the user");
+			}
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public void cickOnEditQuote(String quoteNumber) {
 		try {
 			commonLib.scroll_view_Dynamic("SF_Edit_Quote_Expander_Button_XPATH", quoteNumber);
@@ -321,7 +402,7 @@ public class Quote_ProposalSetupPage {
 
 	public void addQuoteLine(String partNumber) {
 		try {
-			// commonLib.scrollDownToElement("SF_Quotes_Quick_Add_Button_XPATH", "Button");
+			commonLib.scrollDownToElement("SF_Quotes_Quick_Add_Button_XPATH", "Button");
 			commonLib.waitForElementToBeClickable("SF_Quotes_Quick_Add_Button_XPATH");
 			commonLib.click("SF_Quotes_Quick_Add_Button_XPATH");
 			Thread.sleep(2000);
@@ -415,27 +496,29 @@ public class Quote_ProposalSetupPage {
 	}
 
 	public void clickQuoteTransactionLink(String transactionName) {
-
 		try {
-			commonLib.KeyPress_pageUp();
-			boolean bol = commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Transaction_Link_XPATH",
-					transactionName);
-			if (bol) {
-				commonLib.log(LogStatus.INFO, transactionName + " field is visible");
-			} else {
-				commonLib.click("SF_Transaction_Link_XPATH");
-				Thread.sleep(1000);
+			for (int i = 0; i <= 5; i++) {
+				commonLib.KeyPress_pageUp();
+				commonLib.scroll("Up");
+				JavascriptExecutor jse = (JavascriptExecutor) commonLib.getDriver();
+				jse.executeScript("window.scrollBy(0,-350)", "");
+				if (commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Transaction_Link_XPATH", transactionName)) {
+					commonLib.log(LogStatus.INFO, transactionName + " field is visible");
+					break;
+
+				}
+
 			}
-			commonLib.clickWithDynamicValue("SF_Quote_Transaction_Link_XPATH", transactionName);
+			// commonLib.click("SF_Quote_Other_Info_Link_XPATH");
+			commonLib.clickbyjavascriptWithDynamicValue("SF_Quote_Transaction_Link_XPATH", transactionName);
+			// commonLib.clickWithDynamicValue("SF_Quote_Transaction_Link_XPATH",
+			// transactionName);
 			commonLib.waitForPageToLoad();
 			Thread.sleep(2000);
 			commonLib.getScreenshot();
 			commonLib.log(LogStatus.INFO,
 					"Clicked successfully on Link: " + transactionName + " under CPQ Quote screen");
-		} catch (AWTException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -630,6 +713,144 @@ public class Quote_ProposalSetupPage {
 	}
 
 	/**
+	 * Method to expand any Section Name under Quote screen
+	 * 
+	 * @param sectionname
+	 */
+	public void expandSectionUnderQuoteScreen(String sectionname) {
+		commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Section_Name_XPATH", sectionname);
+		commonLib.scroll_view_Dynamic("SF_Quote_Section_Name_XPATH", sectionname);
+		commonLib.clickWithDynamicValue("SF_Quote_Section_Name_XPATH", sectionname);
+		commonLib.waitForPageToLoad();
+		commonLib.getScreenshot();
+		commonLib.log(LogStatus.INFO, sectionname + " : is expanded successfully");
+	}
+
+	public void verifySectionNameAvailablity(String sectionname) {
+		commonLib.scroll_view_Dynamic("SF_Quote_Section_Name_XPATH", sectionname);
+		boolean bol = commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Section_Name_XPATH", sectionname);
+		if (bol) {
+			commonLib.log(LogStatus.PASS, sectionname + "  is visible to the user");
+			commonLib.getScreenshot();
+		} else {
+			commonLib.log(LogStatus.PASS, sectionname + "  is visible to the user");
+			commonLib.getScreenshot();
+		}
+	}
+
+	public void scrolltoSectionNameUnderQuoteScreen(String sectionname) throws AWTException {
+		commonLib.KeyPress_pageUp();
+		commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Section_Name_XPATH", sectionname);
+		commonLib.scroll_view_Dynamic("SF_Quote_Section_Name_XPATH", sectionname);
+		commonLib.scroll("Up");
+		commonLib.waitForPageToLoad();
+		commonLib.getScreenshot();
+		commonLib.log(LogStatus.INFO, sectionname + " : is expanded successfully");
+	}
+
+	/**
+	 * Method to navigate to a particular tab under Quote Section
+	 * 
+	 * @param tabName
+	 */
+	public void navigateToTabUnderQuoteSection(String tabName) {
+		try {
+			commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Tab_Name_XPATH", tabName);
+//			commonLib.scroll_view_Dynamic("SF_Quote_Tab_Name_XPATH", tabName);
+//			commonLib.scroll("Up");
+			Thread.sleep(1000);
+			// commonLib.clickbyjavascriptWithDynamicValue("SF_Quote_Tab_Name_XPATH",
+			// tabName);
+			commonLib.clickWithDynamicValue("SF_Quote_Tab_Name_XPATH", tabName);
+			commonLib.waitForPageToLoad();
+			commonLib.getScreenshot();
+			commonLib.log(LogStatus.INFO, "Successfully navigate to tab :" + tabName);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Method to verify visibility of columns under Service Section of Summary
+	 * Rollup
+	 * 
+	 * @param columnName
+	 */
+	public void verifyServiceSummaryValues(String columnName) {
+		commonLib.scroll_view_Dynamic("SF_Quote_Summary_Service_Header_XPATH", columnName);
+		boolean bol = commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Summary_Service_Header_XPATH", columnName);
+		if (bol) {
+			commonLib.log(LogStatus.PASS, columnName + " is visible in the system");
+		} else {
+			commonLib.log(LogStatus.FAIL, columnName + " is not visible in the system");
+			commonLib.getScreenshot();
+		}
+
+	}
+	
+	public void selectFlexInfoReviewCheckox() {
+		commonLib.waitForVisibilityOf("SF_Quote_Flex_Info_Reviewed_Checkbox_XPATH");
+		commonLib.click("SF_Quote_Flex_Info_Reviewed_Checkbox_XPATH");
+		commonLib.getScreenshot();
+		commonLib.log(LogStatus.INFO, "Flex Deal Info Reviewed checkbox is selected");
+	}
+
+	/**
+	 * Method to verify visibility of columns under Service Section of Summary
+	 * Rollup
+	 * 
+	 * @param columnName
+	 */
+	public void verifyBaseSummaryValues(String columnName) {
+		commonLib.scroll_view_Dynamic("SF_Quote_Summary_Base_Header_XPATH", columnName);
+		boolean bol = commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Summary_Base_Header_XPATH", columnName);
+		if (bol) {
+			commonLib.log(LogStatus.PASS, columnName + " is visible in the system");
+		} else {
+			commonLib.log(LogStatus.FAIL, columnName + " is not visible in the system");
+			commonLib.getScreenshot();
+		}
+	}
+
+	public String verifyBusinessUnitEditableStatusUnderPricingSection(String buName) throws AWTException {
+		scrolltoSectionNameUnderQuoteScreen("Pricing");
+		commonLib.scroll("Up");
+		commonLib.getScreenshot();
+		// getAttributeDynamicSF_Quote_Business_Unit_XPATH
+		String attrName = sfdcLib.getAttributeDynamic("SF_Quote_Business_Unit_XPATH", buName, "class");
+		return attrName;
+
+	}
+
+	/**
+	 * @param tabName  = Capital Inputs, Consumables Input , Services Input
+	 * @param viewName = Pricing, Finance
+	 * @throws InterruptedException
+	 */
+	public void saveFinancialModel(String tabName, String viewName) throws InterruptedException {
+
+		if (tabName.equalsIgnoreCase("Capital Inputs")) {
+			commonLib.click("SF_Quote_Capital_Input_XPATH");
+			commonLib.clickWithDynamicValue("SF_Quote_Business_Unit_XPATH", viewName);
+			commonLib.click("SF_Quote_Capital_Save_Button_XPATH");
+		}
+		if (tabName.equalsIgnoreCase("Consumables Input")) {
+			commonLib.click("SF_Quote_Consumable_Input_XPATH");
+			commonLib.clickWithDynamicValue("SF_Quote_Business_Unit_XPATH", viewName);
+			commonLib.click("SF_Quote_Consumable_Save_Button_XPATH");
+		}
+		if (tabName.equalsIgnoreCase("Services Input")) {
+			commonLib.click("SF_Quote_Service_Input_XPATH");
+			commonLib.clickWithDynamicValue("SF_Quote_Business_Unit_XPATH", viewName);
+			commonLib.click("SF_Quote_Service_Save_Button_XPATH");
+		}
+		Thread.sleep(1000);
+		commonLib.waitForVisibilityOf("SF_Quote_Processing_Scroll_XPATH");
+		commonLib.waitForPageToLoad();
+	}
+
+	/**
 	 * Method to verify field names under Quote screen
 	 * 
 	 * @param fieldName
@@ -640,27 +861,38 @@ public class Quote_ProposalSetupPage {
 		return labelName;
 	}
 
-	public String verifyQuoteStatusValue() throws AWTException {
-       // commonLib.scroll("UP");
+	/**
+	 * Method to fetch quote status value
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String verifyQuoteStatusValue() throws Exception {
+		// commonLib.scroll("UP");
 		commonLib.scrollDownToElement("SF_Quote_Status_XPATH", "input-text");
 		String value = commonLib.getAttribute("SF_Quote_Status_XPATH", "value");
 		commonLib.getScreenshot();
 		commonLib.log(LogStatus.INFO, "Quote Status Value is: " + value);
 		return value;
 	}
-	
+
+	/**
+	 * Method to selct IDIN value
+	 * 
+	 * @param idinvalue
+	 */
 	public void selectIDINValue(String idinvalue) {
 		try {
-			commonLib.scrollDownToElement("SF_Quote_Mass_Update_Section_XPATH", "h3");
+			commonLib.scrollDownToElement("SF_Quote_Deal_Comments_XPATH", "label");
 			Thread.sleep(1000);
-		    commonLib.performHoverandClick("SF_Quote_Select_IDN_Dropdown_Arrow_XPATH");		
+			commonLib.performHoverandClick("SF_Quote_Select_IDN_Dropdown_Arrow_XPATH");
 			Thread.sleep(1000);
 			commonLib.clickWithDynamicValue("SF_Quote_IDIN_Value_XPATH", idinvalue);
 			Thread.sleep(3000);
 			commonLib.click("SF_Quote_Update_IDIN_XPATH");
 			commonLib.waitForVisibilityOf("SF_Quote_Processing_Scroll_XPATH");
 			commonLib.waitForPageToLoad();
-			
+
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -668,7 +900,75 @@ public class Quote_ProposalSetupPage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+	}
+
+	/**
+	 * Method to update GPO Pricelist Value
+	 * 
+	 * @param gpovalue
+	 */
+
+	public void selectGPOPricelistValue(String gpovalue) {
+		try {
+			commonLib.scroll("Up");
+//			commonLib.scrollDownToElement("SF_Quote_Mass_Update_Section_XPATH", "h3");
+			Thread.sleep(1000);
+			commonLib.performHoverandClick("SF_Quote_GPO_Pricelist_Dropdown_Arrow_XPATH");
+			Thread.sleep(1000);
+			commonLib.clickWithDynamicValue("SF_Quote_IDIN_Value_XPATH", gpovalue);
+			Thread.sleep(3000);
+			commonLib.click("SF_Quote_Update_GPO_XPATH");
+			commonLib.waitForVisibilityOf("SF_Quote_Processing_Scroll_XPATH");
+			commonLib.waitForPageToLoad();
+
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@SuppressWarnings("null")
+	public List<String> fetchSecionNamesUnderQuoteScreen() {
+		List<String> elements = new ArrayList<String>();
+		List<WebElement> sectionNameElements = commonLib.findElements("SF_Quote_Section_Name_List_XPATH");
+
+		for (int i = 0; i <= sectionNameElements.size() - 1; i++) {
+			String text = sectionNameElements.get(i).getText();
+			elements.add(text);
+		}
+
+		return elements;
+	}
+
+	@SuppressWarnings("null")
+	public List<String> fetchColumnHeaderUnderFinancialRollSection() {
+		List<String> elements = new ArrayList<String>();
+		List<WebElement> sectionNameElements = commonLib.findElements("SF_Quote_Financial_Model_Column_Header_XPATH");
+		for (int i = 0; i <= sectionNameElements.size() - 1; i++) {
+			String text = sectionNameElements.get(i).getText();
+			elements.add(text);
+		}
+
+		return elements;
+	}
+
+	public void clickOnFinancialModelTabLink(String tabName) {
+		commonLib.scroll_view_Dynamic("SF_Quote_Finanacial_Model_Tab_XPATH", tabName);
+		commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Finanacial_Model_Tab_XPATH", tabName);
+		commonLib.clickWithDynamicValue("SF_Quote_Finanacial_Model_Tab_XPATH", tabName);
+		commonLib.waitForPageToLoad();
+		commonLib.getScreenshot();
+		commonLib.log(LogStatus.INFO, "Successfully navigated to Financial Model Tab: " + tabName);
+	}
+
+	public String fetchServiceInputValues() {
+		String str = commonLib.getAttribute("SF_Quote_Service_Input_View_XPATH", "value");
+		return str;
 	}
 
 }

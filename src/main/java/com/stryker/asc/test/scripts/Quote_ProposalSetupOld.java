@@ -568,7 +568,6 @@ public class Quote_ProposalSetupOld extends com.stryker.driver.SfdcDriver {
 					quote.clickOnCPQQuoteOperationsButton("Return to Opportunity");
 					quote.clickOnCPQQuoteOperationsButton("Save");
 					//Below test step is not working currently so commenting it out
-//					quote.clickQuoteTransactionLink("Transaction Details");	
 //					String quoteStatus2= quote.verfiyQuoteStatusField("Status");
 //					commonLib.softAssertThat(
 //							quoteStatus2.equalsIgnoreCase("2. Data Aggregation"),
