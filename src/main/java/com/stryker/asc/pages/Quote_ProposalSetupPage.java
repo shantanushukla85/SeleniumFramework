@@ -970,5 +970,12 @@ public class Quote_ProposalSetupPage {
 		String str = commonLib.getAttribute("SF_Quote_Service_Input_View_XPATH", "value");
 		return str;
 	}
+	
+	public void clikOnUploadCSVFile() {
+		commonLib.waitForElementToBeClickable("SF_Quote_Upload_CSV_Button_XPATH");
+		commonLib.click("SF_Quote_CSV_Part_File_XPATH");	
+		commonLib.waitForPageToLoad();
+		commonLib.log(LogStatus.INFO, "Clicked successfully on Upload CSV File button");		
+	}
 
 }
