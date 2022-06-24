@@ -22,7 +22,7 @@ public class Quoting_ProposalSetup extends SfdcDriver {
 	OpportunitiesPage oppor = new OpportunitiesPage(commonLib);
 	Quote_ProposalSetupPage quote = new Quote_ProposalSetupPage(commonLib);
 
-	String workSheet = "Quote_ProposalSetup";
+	String workSheet = "Quote_Setup";
 	boolean exist = false;
 	public String newOppName;
 
@@ -276,7 +276,7 @@ public class Quoting_ProposalSetup extends SfdcDriver {
 					commonLib.startTest(testCaseID);
 					commonLib.log(LogStatus.INFO, testCaseID
 							+ "164753 - Tier pricing calculations");
-					login.loginToSFDC(workBook, 2, 2);
+					login.loginToSFDC(workBook, 3, 3);
 					accountAndTerr.clickAppFromHeader("Accounts");
 					account.clickOnAccountNameLink(accountName);
 					accountAndTerr.clickAppFromHeader("Opportunities");

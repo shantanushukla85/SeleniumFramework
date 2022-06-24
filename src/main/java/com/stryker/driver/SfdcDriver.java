@@ -94,7 +94,7 @@ public class SfdcDriver {
 			testData.add("Skipped");		
 			summaryResult.put(rowcount, testData);
 		}
-		//commonLib.quitDriver();
+		commonLib.quitDriver();
 		commonLib.closeExtent();
 	}
 
@@ -105,7 +105,7 @@ public class SfdcDriver {
 		
 		System.out.println("After Suite");
 		commonLib.updateResult(commonLib.getConfigValue("Summary_WorkbookName"), commonLib.getConfigValue("Summary_SheetName"), summaryResult);
-		//commonLib.quitDriver();
+		commonLib.quitDriver();
 		
 	}
 	

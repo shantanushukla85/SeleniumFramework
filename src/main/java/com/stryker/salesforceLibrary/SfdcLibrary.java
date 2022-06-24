@@ -8000,6 +8000,15 @@ public class SfdcLibrary {
 		Actions builder = new Actions(driver);
 		builder.keyUp(hover, Keys.ARROW_UP).build().perform();
 	}
+	
+	public int getNumberOfWindows() {
+		Set<String> winhandles =commonLib.getDriver().getWindowHandles();
+	    int numberOfWindows = winhandles.size();
+	    return numberOfWindows;
+	    
+	}
+	
+	
 
 
 }

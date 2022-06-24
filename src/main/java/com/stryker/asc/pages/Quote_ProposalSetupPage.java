@@ -1,7 +1,5 @@
 package com.stryker.asc.pages;
 
-import static org.testng.Assert.assertEquals;
-
 import java.awt.AWTException;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -9,9 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import com.relevantcodes.extentreports.ExtentTest;
@@ -24,21 +20,10 @@ import com.stryker.star.CommonLibrary;
  *
  */
 /**
- * @author anshumans
- *
- */
-/**
  * @author SHANTANUS5
  *
  */
-/**
- * @author SHANTANUS5
- *
- */
-/**
- * @author SHANTANUS5
- *
- */
+
 public class Quote_ProposalSetupPage {
 
 	private CommonLibrary commonLib;
@@ -58,6 +43,14 @@ public class Quote_ProposalSetupPage {
 		this.oppor = new OpportunitiesPage(commonLib);
 	}
 
+	/**SHANTANUS5
+	navigationToQuoteCreationPage
+	@throws InterruptedException
+	@throws IOException
+	void
+	Jun 24, 2022
+	*/
+	
 	public void navigationToQuoteCreationPage() throws InterruptedException, IOException {
 		commonLib.scrollDownToElement("SF_Oppty_Quote_Expander_Button_XPATH", "Expander");
 		commonLib.waitForElementToBeClickable("SF_Oppty_Quote_Expander_Button_XPATH");
@@ -68,7 +61,6 @@ public class Quote_ProposalSetupPage {
 			}
 			Thread.sleep(2000);
 		}
-		// commonLib.clickbyjavascript("SF_Oppty_Quote_Expander_Button_XPATH");
 		commonLib.performHover("SF_Oppty_Quote_Expander_Button_XPATH");
 		Thread.sleep(3000);
 		commonLib.click("SF_Oppty_Quote_Expander_Button_XPATH");
@@ -83,9 +75,13 @@ public class Quote_ProposalSetupPage {
 
 	}
 
-	/**
-	 * Method to click on Create Quote screen
-	 */
+	
+	/**SHANTANUS5
+	clickOnCreateQuote: Method to click on Create Quote screen
+	void
+	Jun 24, 2022
+	*/
+	
 	public void clickOnCreateQuote() {
 		commonLib.waitForVisibilityOf("SF_Create_Quote_Button_XPATH");
 		commonLib.click("SF_Create_Quote_Button_XPATH");
@@ -93,12 +89,18 @@ public class Quote_ProposalSetupPage {
 		commonLib.getScreenshot();
 		commonLib.log(LogStatus.INFO, "CPQ Quote screen is displayed");
 		commonLib.waitForPageToLoad();
-
 	}
 
 	/**
-	 * Method to click on Edit button under Quote Details screen
+	 * 
 	 */
+	
+	/**SHANTANUS5
+	clickOnEditQuoteButton: Method to click on Edit button under Quote Details screen
+	void
+	Jun 24, 2022
+	*/
+	
 	public void clickOnEditQuoteButton() {
 		commonLib.waitForVisibilityOf("SF_Edit_Button_XPATH");
 		commonLib.click("SF_Edit_Button_XPATH");
@@ -108,75 +110,43 @@ public class Quote_ProposalSetupPage {
 		commonLib.waitForPageToLoad();
 
 	}
-
-	/**
-	 * Method to click on Quote Number under Realted List Screen
-	 * 
-	 * @param quoteNumber
-	 * @throws InterruptedException
-	 */
+	
+	/**SHANTANUS5
+	clickOnQuoteNumberUnderOpportunityPage: Method to click on Quote Number under Realted List Screen
+	@throws InterruptedException
+	void
+	Jun 24, 2022
+	*/
+	
 	public void clickOnQuoteNumberUnderOpportunityPage() throws InterruptedException {
-		// commonLib.waitForPresenceOfElementLocated("SF_Quote_Link_Under_Oppty_Page_XPATH");
-
 		commonLib.clickbyjavascript("SF_Quote_Link_Under_Oppty_Page_XPATH");
 		commonLib.getScreenshot();
 		Thread.sleep(1000);
-//		if(commonLib.waitForVisibilityOf("SF_Quote_Link_Under_Oppty_Page_XPATH")) {
-//			commonLib.clickbyjavascript("SF_Quote_Link_Under_Oppty_Page_XPATH");	
-//			commonLib.getScreenshot();
-//			commonLib.log(LogStatus.INFO, "Clicked successfully on the quote under Related List screen");
-//		}else {
-//			commonLib.getScreenshot();
-//			commonLib.log(LogStatus.INFO, "Quotes are not available under Related List screen");
-//		}
-//		
-
-//		try {
-//			for (int i = 0; i < 5; i++) {
-//				commonLib.scroll(0, 450);				
-//				if (commonLib.waitForVisibilityOf("SF_Quotes_Header_Under_Oppty_XPATH")){
-//					break;
-//				}
-//			}
-//			// commonLib.scrollDownToElement("SF_Quotes_Header_Under_Oppty_XPATH", "h2");
-//			Thread.sleep(2000);
-//			commonLib.log(LogStatus.INFO, "Quotes Related List is displayed");
-//			boolean bol = commonLib.waitForVisibilityOf("SF_Quote_Link_Under_Oppty_Page_XPATH");
-//
-//			if (bol) {
-//				commonLib.log(LogStatus.INFO, "Quotes are available under Related List screen");
-//				commonLib.getScreenshot();
-//				commonLib.click("SF_Quote_Link_Under_Oppty_Page_XPATH");
-//				commonLib.waitForPageToLoad();
-//			} else {
-//				commonLib.log(LogStatus.INFO, "Quotes are not available");
-//			}
-//
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
 	}
 
+	/**SHANTANUS5
+	switchtoFrameUnderCPQScreen
+	void
+	Jun 24, 2022
+	*/
+	
 	public void switchtoFrameUnderCPQScreen() {
-//		if (commonLib.waitForPresenceOfElementLocated("SF_External_WebPage_Frame_XPATH")) {
-//			commonLib.waitforFramenadSwitch("SF_External_WebPage_Frame_XPATH");
-//		} else {
-//			commonLib.waitforFramenadSwitch("SF_Accessibility_Frame_XPATH");
-//
-//		}
 		commonLib.waitforFramenadSwitch("SF_Accessibility_Frame_XPATH");
-		// commonLib.waitforFramenadSwitch("SF_Session_Frame_XPATH");
 		commonLib.waitforFramenadSwitch("SF_Canvas_Frame_XPATH");
 		commonLib.waitforFramenadSwitch("SF_Oracle_CPQ_Cloud_XPATH");
 
 	}
 
+	/**SHANTANUS5
+	updateQuoteDescription
+	@param quoteDescription
+	void
+	Jun 24, 2022
+	*/
+	
 	public void updateQuoteDescription(String quoteDescription) {
 		commonLib.waitForElementToBeClickable("SF_Quote_Description_TextBox_XPATH");
 		commonLib.click("SF_Quote_Description_TextBox_XPATH");
-		// commonLib.clear("SF_Quote_Description_TextBox_XPATH");
 		commonLib.sendKeys("SF_Quote_Description_TextBox_XPATH", quoteDescription);
 		commonLib.waitForPageToLoad();
 		commonLib.log(LogStatus.INFO, "Quote Description Value is updated successfully");
@@ -184,10 +154,16 @@ public class Quote_ProposalSetupPage {
 
 	}
 
+	/**SHANTANUS5
+	clickOnAddConstructButton
+	void
+	Jun 24, 2022
+	*/
+	
 	public void clickOnAddConstructButton() {
 		try {
 			commonLib.click("SF_Add_To_Constructs_Button_XPATH");
-			Thread.sleep(3000);
+			Thread.sleep(5000);
 			commonLib.waitForPageToLoad();
 			commonLib.log(LogStatus.INFO, "Clicked successfully on Add to Construct button");
 			commonLib.getScreenshot();
@@ -197,6 +173,14 @@ public class Quote_ProposalSetupPage {
 		}
 	}
 
+	/**SHANTANUS5
+	selectDropdownValueUnderAddToConstruct
+	@param fieldName
+	@param fieldValue
+	void
+	Jun 24, 2022
+	*/
+	
 	public void selectDropdownValueUnderAddToConstruct(String fieldName, String fieldValue) {
 		try {
 			commonLib.waitForElementToBeClickable_Dynamic("SF_Add_To_Construct_Field_Dropdown_XPATH", fieldName);
@@ -212,6 +196,12 @@ public class Quote_ProposalSetupPage {
 		}
 	}
 
+	/**SHANTANUS5
+	clickOnAddToQuote
+	void
+	Jun 24, 2022
+	*/
+	
 	public void clickOnAddToQuote() {
 		try {
 			commonLib.waitForElementToBeClickable("SF_Add_To_Quote_Button_XPATH");
@@ -227,6 +217,13 @@ public class Quote_ProposalSetupPage {
 		}
 	}
 
+	/**SHANTANUS5
+	clickOnUpdateQuote
+	@throws IOException
+	void
+	Jun 24, 2022
+	*/
+	
 	public void clickOnUpdateQuote() throws IOException {
 		try {
 			commonLib.waitForPresenceOfElementLocated("SF_Update_Quote_Button_ID");
@@ -243,12 +240,25 @@ public class Quote_ProposalSetupPage {
 		}
 	}
 
+	/**SHANTANUS5
+	clickOnLoadButtonUnderAddConstruct
+	void
+	Jun 24, 2022
+	*/
+	
 	public void clickOnLoadButtonUnderAddConstruct() {
 		commonLib.click("SF_Load_Quote_Button_XPATH");
 		commonLib.log(LogStatus.INFO, "Clicked successfully on Load Quote button");
 		commonLib.getScreenshot();
 	}
 
+	/**SHANTANUS5
+	updateProcedurePrice
+	@param price
+	void
+	Jun 24, 2022
+	*/
+	
 	public void updateProcedurePrice(String price) {
 		commonLib.waitForVisibilityOf("SF_Manual_Procedure_Price_XPATH");
 		commonLib.clear("SF_Manual_Procedure_Price_XPATH");
@@ -257,6 +267,14 @@ public class Quote_ProposalSetupPage {
 		commonLib.getScreenshot();
 	}
 
+	/**SHANTANUS5
+	updateAddConstructTextboxField
+	@param fieldName
+	@param fieldValue
+	void
+	Jun 24, 2022
+	*/
+	
 	public void updateAddConstructTextboxField(String fieldName, String fieldValue) {
 		commonLib.clear_DynamicValue("SF_Year_Textbox_XPATH", fieldName);
 		commonLib.sendKeys_DynamicValue("SF_Year_Textbox_XPATH", fieldName, fieldValue);
@@ -264,6 +282,12 @@ public class Quote_ProposalSetupPage {
 
 	}
 
+	/**SHANTANUS5
+	clickOnCreateQuoteButton
+	void
+	Jun 24, 2022
+	*/
+	
 	public void clickOnCreateQuoteButton() {
 		commonLib.waitForElementToBeClickable("SF_Create_Quote_Button_XPATH");
 		commonLib.click("SF_Create_Quote_Button_XPATH");
@@ -271,27 +295,18 @@ public class Quote_ProposalSetupPage {
 		commonLib.getScreenshot();
 	}
 
-//	public void clickOnQuoteNumber(String quoteNumber) {
-//		commonLib.waitForPageToLoad();
-//		JavascriptExecutor jse = (JavascriptExecutor)commonLib.getDriver();
-//		jse.executeScript("window.scrollBy(0,350)", "");
-//		//commonLib.scrollDownToElement("SF_Quotes_Header_Under_Oppty_XPATH", "a");
-//		commonLib.scroll_view_Dynamic("SF_Quote_Number_Link_XPATH", quoteNumber);
-//		boolean bol = commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Number_Link_XPATH", quoteNumber);
-//		if (bol) {
-//			commonLib.getScreenshot();
-//			commonLib.clickbyjavascriptWithDynamicValue("SF_Quote_Number_Link_XPATH", quoteNumber);
-//			//commonLib.clickWithDynamicValue("SF_Quote_Number_Link_XPATH", quoteNumber);
-//			commonLib.log(LogStatus.PASS, "Clicked successfully on Quote Number Link");
-//		} else {
-//			commonLib.log(LogStatus.FAIL, "Quote Number is not available");
-//		}
-//	}
 
+	/**SHANTANUS5
+	clickOnQuoteNumber
+	@param quoteNumber
+	void
+	Jun 24, 2022
+	*/
 	public void clickOnQuoteNumber(String quoteNumber) {
 		try {
 			commonLib.waitForPageToLoad();
-			commonLib.scroll_view_Dynamic("SF_Quote_Number_Link_XPATH", quoteNumber);
+			commonLib.scrollDownToElement("SF_Member_Role_XPATH", "div");
+			Thread.sleep(2000);
 			commonLib.clickbyjavascriptWithDynamicValue("SF_Quote_Number_Link_XPATH", quoteNumber);
 			commonLib.log(LogStatus.PASS, "Clicked successfully on Quote Number Link");
 		} catch (Exception e) {
@@ -301,6 +316,12 @@ public class Quote_ProposalSetupPage {
 
 	}
 
+	/**SHANTANUS5
+	clickOnCloneQuote
+	void
+	Jun 24, 2022
+	*/
+	
 	public void clickOnCloneQuote() {
 		try {
 			boolean bol = commonLib.waitForPresenceOfElementLocated("SF_Clone_Quote_Button_XPATH");
@@ -320,12 +341,13 @@ public class Quote_ProposalSetupPage {
 		}
 
 	}
-
-	/**
-	 * Method to click on Save, Return to Opportunity and Rerun Pricing buttons
-	 * 
-	 * @param buttonName
-	 */
+	
+	/**SHANTANUS5
+	clickOnCPQQuoteOperationsButton: Method to click on Save, Return to Opportunity and Rerun Pricing buttons
+	@param buttonName
+	void
+	Jun 24, 2022
+	*/
 	public void clickOnCPQQuoteOperationsButton(String buttonName) {
 		try {
 			boolean bol = commonLib.waitForVisibilityOf_DynamicXpath("SF_CP_Quote_Operation_Button_XPATH", buttonName);
@@ -347,6 +369,13 @@ public class Quote_ProposalSetupPage {
 		}
 	}
 
+	/**SHANTANUS5
+	verifyPresenceOfOperationButton
+	@param actionName
+	void
+	Jun 24, 2022
+	*/
+	
 	public void verifyPresenceOfOperationButton(String actionName) {
 		try {
 			commonLib.KeyPress_pageUp();
@@ -364,6 +393,13 @@ public class Quote_ProposalSetupPage {
 		}
 	}
 
+	/**SHANTANUS5
+	cickOnEditQuote
+	@param quoteNumber
+	void
+	Jun 24, 2022
+	*/
+	
 	public void cickOnEditQuote(String quoteNumber) {
 		try {
 			commonLib.scroll_view_Dynamic("SF_Edit_Quote_Expander_Button_XPATH", quoteNumber);
@@ -389,17 +425,25 @@ public class Quote_ProposalSetupPage {
 
 	}
 
-	/**
-	 * Method to fetch quote description field value
-	 * 
-	 * @return
-	 */
+	/**SHANTANUS5
+	fetchQuoteDescriptiontValue: Method to fetch quote description field value
+	@return
+	String
+	Jun 24, 2022
+	*/
 	public String fetchQuoteDescriptiontValue() {
 		String descriptionValue = commonLib.getAttribute("SF_Quote_Description_TextValue_XPATH", "value");
 		commonLib.getScreenshot();
 		return descriptionValue;
 	}
 
+	/**SHANTANUS5
+	addQuoteLine
+	@param partNumber
+	void
+	Jun 24, 2022
+	*/
+	
 	public void addQuoteLine(String partNumber) {
 		try {
 			commonLib.scrollDownToElement("SF_Quotes_Quick_Add_Button_XPATH", "Button");
@@ -423,10 +467,16 @@ public class Quote_ProposalSetupPage {
 
 	}
 
+	/**SHANTANUS5
+	verifyPartNumberProducts
+	@return
+	int
+	Jun 24, 2022
+	*/
+	
 	public int verifyPartNumberProducts() {
 		int parts = 0;
 		try {
-			// commonLib.waitForElementToBeClickable("SF_Quotes_Tab_XPATH");
 			commonLib.clickbyjavascript("SF_Quotes_Tab_XPATH");
 			commonLib.waitForPageToLoad();
 			commonLib.waitForElementToBeClickable("SF_Quote_Number_LinkText_XPATH");
@@ -445,6 +495,12 @@ public class Quote_ProposalSetupPage {
 
 	}
 
+	/**SHANTANUS5
+	verifyProposedPriceIsNonEditable
+	void
+	Jun 24, 2022
+	*/
+	
 	public void verifyProposedPriceIsNonEditable() {
 		List<WebElement> proposedPrice = commonLib.findElements("SF_List_Price_Elements_XPATH");
 		for (int i = 0; i <= proposedPrice.size(); i++) {
@@ -460,6 +516,14 @@ public class Quote_ProposalSetupPage {
 
 	}
 
+	/**SHANTANUS5
+	updateRebateFieldValue
+	@param rebatePercentage
+	@param rebateAmount
+	void
+	Jun 24, 2022
+	*/
+	
 	public void updateRebateFieldValue(String rebatePercentage, String rebateAmount) {
 		commonLib.scrollDownToElement("SF_Mass_Update_Expander_Button_XPATH", "Button");
 		commonLib.clickbyjavascript("SF_Mass_Update_Expander_Button_XPATH");
@@ -476,11 +540,15 @@ public class Quote_ProposalSetupPage {
 		sfdcLib.waitforInvisibilityOfWE("SVMX_Loading_Spinner_XPATH");
 	}
 
+	/**SHANTANUS5
+	clickOnRequestFinancing
+	void
+	Jun 24, 2022
+	*/
+	
 	public void clickOnRequestFinancing() {
 		try {
 			commonLib.KeyPress_pageUp();
-			// commonLib.scrollDownToElement("SF_Request_Finance_Checkbox_XPATH",
-			// "Checkbox");
 			commonLib.waitForElementToBeClickable("SF_Request_Finance_Checkbox_XPATH");
 			commonLib.click("SF_Request_Finance_Checkbox_XPATH");
 			commonLib.getScreenshot();
@@ -495,6 +563,13 @@ public class Quote_ProposalSetupPage {
 		}
 	}
 
+	/**SHANTANUS5
+	clickQuoteTransactionLink
+	@param transactionName
+	void
+	Jun 24, 2022
+	*/
+	
 	public void clickQuoteTransactionLink(String transactionName) {
 		try {
 			for (int i = 0; i <= 5; i++) {
@@ -509,10 +584,7 @@ public class Quote_ProposalSetupPage {
 				}
 
 			}
-			// commonLib.click("SF_Quote_Other_Info_Link_XPATH");
 			commonLib.clickbyjavascriptWithDynamicValue("SF_Quote_Transaction_Link_XPATH", transactionName);
-			// commonLib.clickWithDynamicValue("SF_Quote_Transaction_Link_XPATH",
-			// transactionName);
 			commonLib.waitForPageToLoad();
 			Thread.sleep(2000);
 			commonLib.getScreenshot();
@@ -525,6 +597,14 @@ public class Quote_ProposalSetupPage {
 
 	}
 
+	/**SHANTANUS5
+	updateFlexQuestionaireDropdownValues
+	@param fieldName
+	@param fieldValue
+	void
+	Jun 24, 2022
+	*/
+	
 	public void updateFlexQuestionaireDropdownValues(String fieldName, String fieldValue) {
 		try {
 			// SF_Finance_Flex_Dropdown_Link_XPATH
@@ -539,6 +619,13 @@ public class Quote_ProposalSetupPage {
 		}
 	}
 
+	/**SHANTANUS5
+	clickOnFinanceFlexRadioButton
+	@param fieldName
+	void
+	Jun 24, 2022
+	*/
+	
 	public void clickOnFinanceFlexRadioButton(String fieldName) {
 		try {
 			commonLib.waitForElementToBeClickable_Dynamic("SF_Finance_Flex_RadioButton_XPATH", fieldName);
@@ -551,6 +638,13 @@ public class Quote_ProposalSetupPage {
 		}
 	}
 
+	/**SHANTANUS5
+	updateFlexComment
+	@param flexComment
+	void
+	Jun 24, 2022
+	*/
+	
 	public void updateFlexComment(String flexComment) {
 		commonLib.waitForVisibilityOf("SF_Comments_Flex_Textbox_XPATH");
 		commonLib.click("SF_Comments_Flex_Textbox_XPATH");
@@ -560,6 +654,13 @@ public class Quote_ProposalSetupPage {
 		commonLib.log(LogStatus.INFO, "Successfully entered: " + flexComment + " under Comments to Flex field");
 	}
 
+	/**SHANTANUS5
+	updateFinanceFlexFacilityType
+	@param fieldName
+	void
+	Jun 24, 2022
+	*/
+	
 	public void updateFinanceFlexFacilityType(String fieldName) {
 		try {
 			commonLib.waitForElementToBeClickable_Dynamic("SF_Finance_Flex_Facility_Type_Radio_XPATH", fieldName);
@@ -573,6 +674,12 @@ public class Quote_ProposalSetupPage {
 		}
 	}
 
+	/**SHANTANUS5
+	clickOnSendToFlexButton
+	void
+	Jun 24, 2022
+	*/
+	
 	public void clickOnSendToFlexButton() {
 		try {
 			commonLib.KeyPress_pageUp();
@@ -593,21 +700,20 @@ public class Quote_ProposalSetupPage {
 		}
 	}
 
-	/**
-	 * @param fieldName
-	 * @return
-	 */
+	/**SHANTANUS5
+	verfiyQuoteStatusField
+	@param fieldName
+	@return
+	String
+	Jun 24, 2022
+	*/
+	
 	public String verfiyQuoteStatusField(String fieldName) {
 		String fieldText = null;
 		try {
 			commonLib.KeyPress_pageUp();
-			// String
-			// fieldName2=commonLib.findElementPresence_Dynamic("SF_Quote_Transaction_Field_Text_XPATH",
-			// fieldName);
 			fieldText = commonLib.findElementWithDynamicXPath("SF_Quote_Transaction_Field_Text_XPATH", fieldName)
 					.getAttribute("value");
-			// fieldText = commonLib.getText("SF_Quote_Transaction_Field_Text_XPATH",
-			// fieldName);
 			commonLib.getScreenshot();
 			commonLib.log(LogStatus.INFO, fieldName + " field value is : " + fieldText);
 
@@ -617,15 +723,15 @@ public class Quote_ProposalSetupPage {
 		}
 		return fieldText;
 
-	}
+	}	
 
-	/**
-	 * Method to fetch ASP Price Value
-	 * 
-	 * @return
-	 * @throws AWTException
-	 */
-
+	/**SHANTANUS5
+	verifyASPPriceValue
+	@return
+	@throws AWTException
+	String
+	Jun 24, 2022
+	*/
 	public String verifyASPPriceValue() throws AWTException {
 
 		for (int i = 0; i < 8; i++) {
@@ -645,6 +751,13 @@ public class Quote_ProposalSetupPage {
 		return ASPtext;
 	}
 
+	/**SHANTANUS5
+	verifyQuoteDetailsFieldValues
+	@param fieldName
+	void
+	Jun 24, 2022
+	*/
+	
 	public void verifyQuoteDetailsFieldValues(String fieldName) {
 		boolean field = commonLib.findElementWithDynamicXPath("SF_Quote_Details_Field_Name_XPATH", fieldName)
 				.isDisplayed();
@@ -658,13 +771,14 @@ public class Quote_ProposalSetupPage {
 			commonLib.getScreenshot();
 		}
 	}
-
-	/**
-	 * Method to enter Year Values under various Years Columns of Parts table
-	 * 
-	 * @param yearNum
-	 * @param value
-	 */
+		
+	/**SHANTANUS5
+	enterYearValueforLineItem
+	@param yearNum
+	@param value
+	void
+	Jun 24, 2022
+	*/
 	public void enterYearValueforLineItem(String yearNum, String value) {
 		try {
 			for (int i = 0; i <= 5; i++) {
@@ -676,11 +790,9 @@ public class Quote_ProposalSetupPage {
 					break;
 				}
 			}
-			// commonLib.performHoverandClickDynamic("SF_Quote_Year_Input_XPATH", yearNum);
 			commonLib.clickbyjavascriptWithDynamicValue("SF_Quote_Year_Cell_XPATH", yearNum);
 			commonLib.clickWithDynamicValue("SF_Quote_Year_Cell_XPATH", yearNum);
 			Thread.sleep(2000);
-			// commonLib.clear_DynamicValue("SF_Quote_Year_Input_XPATH", yearNum);
 			commonLib.sendKeys_DynamicValue("SF_Quote_Year_Input_XPATH", yearNum, value);
 
 		} catch (Exception e) {
@@ -689,12 +801,13 @@ public class Quote_ProposalSetupPage {
 		}
 	}
 
-	/**
-	 * Method to expand mass update section
-	 * 
-	 * @param yearNum
-	 * @param value
-	 */
+	
+	/**SHANTANUS5
+	expandMassUpdatedSection
+	void
+	Jun 24, 2022
+	*/
+	
 	public void expandMassUpdatedSection() {
 		try {
 			Thread.sleep(1000);
@@ -712,11 +825,12 @@ public class Quote_ProposalSetupPage {
 		}
 	}
 
-	/**
-	 * Method to expand any Section Name under Quote screen
-	 * 
-	 * @param sectionname
-	 */
+	/**SHANTANUS5
+	expandSectionUnderQuoteScreen: Method to expand any Section Name under Quote screen
+	@param sectionname
+	void
+	Jun 24, 2022
+	*/
 	public void expandSectionUnderQuoteScreen(String sectionname) {
 		commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Section_Name_XPATH", sectionname);
 		commonLib.scroll_view_Dynamic("SF_Quote_Section_Name_XPATH", sectionname);
@@ -726,6 +840,13 @@ public class Quote_ProposalSetupPage {
 		commonLib.log(LogStatus.INFO, sectionname + " : is expanded successfully");
 	}
 
+	/**SHANTANUS5
+	verifySectionNameAvailablity
+	@param sectionname
+	void
+	Jun 24, 2022
+	*/
+	
 	public void verifySectionNameAvailablity(String sectionname) {
 		commonLib.scroll_view_Dynamic("SF_Quote_Section_Name_XPATH", sectionname);
 		boolean bol = commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Section_Name_XPATH", sectionname);
@@ -738,6 +859,14 @@ public class Quote_ProposalSetupPage {
 		}
 	}
 
+	/**SHANTANUS5
+	scrolltoSectionNameUnderQuoteScreen
+	@param sectionname
+	@throws AWTException
+	void
+	Jun 24, 2022
+	*/
+	
 	public void scrolltoSectionNameUnderQuoteScreen(String sectionname) throws AWTException {
 		commonLib.KeyPress_pageUp();
 		commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Section_Name_XPATH", sectionname);
@@ -747,20 +876,17 @@ public class Quote_ProposalSetupPage {
 		commonLib.getScreenshot();
 		commonLib.log(LogStatus.INFO, sectionname + " : is expanded successfully");
 	}
-
-	/**
-	 * Method to navigate to a particular tab under Quote Section
-	 * 
-	 * @param tabName
-	 */
+	
+	/**SHANTANUS5
+	navigateToTabUnderQuoteSection
+	@param tabName
+	void
+	Jun 24, 2022
+	*/
 	public void navigateToTabUnderQuoteSection(String tabName) {
 		try {
 			commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Tab_Name_XPATH", tabName);
-//			commonLib.scroll_view_Dynamic("SF_Quote_Tab_Name_XPATH", tabName);
-//			commonLib.scroll("Up");
 			Thread.sleep(1000);
-			// commonLib.clickbyjavascriptWithDynamicValue("SF_Quote_Tab_Name_XPATH",
-			// tabName);
 			commonLib.clickWithDynamicValue("SF_Quote_Tab_Name_XPATH", tabName);
 			commonLib.waitForPageToLoad();
 			commonLib.getScreenshot();
@@ -770,13 +896,13 @@ public class Quote_ProposalSetupPage {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * Method to verify visibility of columns under Service Section of Summary
-	 * Rollup
-	 * 
-	 * @param columnName
-	 */
+	
+	/**SHANTANUS5
+	verifyServiceSummaryValues
+	@param columnName
+	void
+	Jun 24, 2022
+	*/
 	public void verifyServiceSummaryValues(String columnName) {
 		commonLib.scroll_view_Dynamic("SF_Quote_Summary_Service_Header_XPATH", columnName);
 		boolean bol = commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Summary_Service_Header_XPATH", columnName);
@@ -788,6 +914,12 @@ public class Quote_ProposalSetupPage {
 		}
 
 	}
+
+	/**SHANTANUS5
+	selectFlexInfoReviewCheckox
+	void
+	Jun 24, 2022
+	*/
 	
 	public void selectFlexInfoReviewCheckox() {
 		commonLib.waitForVisibilityOf("SF_Quote_Flex_Info_Reviewed_Checkbox_XPATH");
@@ -795,13 +927,13 @@ public class Quote_ProposalSetupPage {
 		commonLib.getScreenshot();
 		commonLib.log(LogStatus.INFO, "Flex Deal Info Reviewed checkbox is selected");
 	}
-
-	/**
-	 * Method to verify visibility of columns under Service Section of Summary
-	 * Rollup
-	 * 
-	 * @param columnName
-	 */
+	
+	/**SHANTANUS5
+	verifyBaseSummaryValues
+	@param columnName
+	void
+	Jun 24, 2022
+	*/
 	public void verifyBaseSummaryValues(String columnName) {
 		commonLib.scroll_view_Dynamic("SF_Quote_Summary_Base_Header_XPATH", columnName);
 		boolean bol = commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Summary_Base_Header_XPATH", columnName);
@@ -813,21 +945,32 @@ public class Quote_ProposalSetupPage {
 		}
 	}
 
+	/**SHANTANUS5
+	verifyBusinessUnitEditableStatusUnderPricingSection
+	@param buName
+	@return
+	@throws AWTException
+	String
+	Jun 24, 2022
+	*/
+	
 	public String verifyBusinessUnitEditableStatusUnderPricingSection(String buName) throws AWTException {
 		scrolltoSectionNameUnderQuoteScreen("Pricing");
 		commonLib.scroll("Up");
 		commonLib.getScreenshot();
-		// getAttributeDynamicSF_Quote_Business_Unit_XPATH
 		String attrName = sfdcLib.getAttributeDynamic("SF_Quote_Business_Unit_XPATH", buName, "class");
 		return attrName;
 
 	}
-
-	/**
-	 * @param tabName  = Capital Inputs, Consumables Input , Services Input
-	 * @param viewName = Pricing, Finance
-	 * @throws InterruptedException
-	 */
+	
+	/**SHANTANUS5
+	saveFinancialModel
+	@param tabName
+	@param viewName
+	@throws InterruptedException
+	void
+	Jun 24, 2022
+	*/
 	public void saveFinancialModel(String tabName, String viewName) throws InterruptedException {
 
 		if (tabName.equalsIgnoreCase("Capital Inputs")) {
@@ -850,23 +993,25 @@ public class Quote_ProposalSetupPage {
 		commonLib.waitForPageToLoad();
 	}
 
-	/**
-	 * Method to verify field names under Quote screen
-	 * 
-	 * @param fieldName
-	 * @return
-	 */
+	/**SHANTANUS5
+	verifyFieldLabelNames
+	@param fieldName
+	@return
+	String
+	Jun 24, 2022
+	*/
 	public String verifyFieldLabelNames(String fieldName) {
 		String labelName = commonLib.getText("SF_Quote_Field_Label_Name_XPATH", fieldName);
 		return labelName;
 	}
-
-	/**
-	 * Method to fetch quote status value
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
+	
+	/**SHANTANUS5
+	verifyQuoteStatusValue: Method to fetch quote status value
+	@return
+	@throws Exception
+	String
+	Jun 24, 2022
+	*/
 	public String verifyQuoteStatusValue() throws Exception {
 		// commonLib.scroll("UP");
 		commonLib.scrollDownToElement("SF_Quote_Status_XPATH", "input-text");
@@ -875,12 +1020,13 @@ public class Quote_ProposalSetupPage {
 		commonLib.log(LogStatus.INFO, "Quote Status Value is: " + value);
 		return value;
 	}
-
-	/**
-	 * Method to selct IDIN value
-	 * 
-	 * @param idinvalue
-	 */
+	
+	/**SHANTANUS5
+	selectIDINValue
+	@param idinvalue
+	void
+	Jun 24, 2022
+	*/
 	public void selectIDINValue(String idinvalue) {
 		try {
 			commonLib.scrollDownToElement("SF_Quote_Deal_Comments_XPATH", "label");
@@ -903,16 +1049,15 @@ public class Quote_ProposalSetupPage {
 
 	}
 
-	/**
-	 * Method to update GPO Pricelist Value
-	 * 
-	 * @param gpovalue
-	 */
-
+	/**SHANTANUS5
+	selectGPOPricelistValue
+	@param gpovalue
+	void
+	Jun 24, 2022
+	*/
 	public void selectGPOPricelistValue(String gpovalue) {
 		try {
 			commonLib.scroll("Up");
-//			commonLib.scrollDownToElement("SF_Quote_Mass_Update_Section_XPATH", "h3");
 			Thread.sleep(1000);
 			commonLib.performHoverandClick("SF_Quote_GPO_Pricelist_Dropdown_Arrow_XPATH");
 			Thread.sleep(1000);
@@ -932,6 +1077,12 @@ public class Quote_ProposalSetupPage {
 
 	}
 
+	/**SHANTANUS5
+	fetchSecionNamesUnderQuoteScreen
+	@return
+	List<String>
+	Jun 24, 2022
+	*/
 	@SuppressWarnings("null")
 	public List<String> fetchSecionNamesUnderQuoteScreen() {
 		List<String> elements = new ArrayList<String>();
@@ -945,6 +1096,12 @@ public class Quote_ProposalSetupPage {
 		return elements;
 	}
 
+	/**SHANTANUS5
+	fetchColumnHeaderUnderFinancialRollSection
+	@return
+	List<String>
+	Jun 24, 2022
+	*/
 	@SuppressWarnings("null")
 	public List<String> fetchColumnHeaderUnderFinancialRollSection() {
 		List<String> elements = new ArrayList<String>();
@@ -957,6 +1114,13 @@ public class Quote_ProposalSetupPage {
 		return elements;
 	}
 
+	/**SHANTANUS5
+	clickOnFinancialModelTabLink
+	@param tabName
+	void
+	Jun 24, 2022
+	*/
+	
 	public void clickOnFinancialModelTabLink(String tabName) {
 		commonLib.scroll_view_Dynamic("SF_Quote_Finanacial_Model_Tab_XPATH", tabName);
 		commonLib.waitForVisibilityOf_DynamicXpath("SF_Quote_Finanacial_Model_Tab_XPATH", tabName);
@@ -966,16 +1130,175 @@ public class Quote_ProposalSetupPage {
 		commonLib.log(LogStatus.INFO, "Successfully navigated to Financial Model Tab: " + tabName);
 	}
 
+	/**SHANTANUS5
+	fetchServiceInputValues
+	@return
+	String
+	Jun 24, 2022
+	*/
+	
 	public String fetchServiceInputValues() {
 		String str = commonLib.getAttribute("SF_Quote_Service_Input_View_XPATH", "value");
 		return str;
 	}
+
+	/**SHANTANUS5
+	clikOnUploadCSVFile
+	void
+	Jun 24, 2022
+	*/
 	
 	public void clikOnUploadCSVFile() {
 		commonLib.waitForElementToBeClickable("SF_Quote_Upload_CSV_Button_XPATH");
-		commonLib.click("SF_Quote_CSV_Part_File_XPATH");	
+		commonLib.click("SF_Quote_CSV_Part_File_XPATH");
 		commonLib.waitForPageToLoad();
-		commonLib.log(LogStatus.INFO, "Clicked successfully on Upload CSV File button");		
+		commonLib.log(LogStatus.INFO, "Clicked successfully on Upload CSV File button");
+	}
+	
+	/**SHANTANUS5
+	fetchQuoteDetailLabelValue
+	@param labelName
+	@return
+	String
+	Jun 24, 2022
+	*/
+	public String fetchQuoteDetailLabelValue(String labelName) {
+		String labelText = commonLib.getText("SF_Quote_Details_Label_Value_XPATH", labelName);
+		commonLib.getScreenshot();
+		commonLib.log(LogStatus.INFO, labelName + " is populated with value: " + labelText);
+		return labelText;
+	}
+
+	/**SHANTANUS5
+	verifyMakoSalesCheckboxStatus
+	@return
+	String
+	Jun 24, 2022
+	*/
+	public String verifyMakoSalesCheckboxStatus() {
+		String attibuteName = commonLib.getAttribute("SF_Includes_Mako_Checkbox_XPATH", "checked");
+		System.out.println("Attribute Name is: " + attibuteName);
+		commonLib.getScreenshot();
+		return attibuteName;
+	}
+	
+	/**SHANTANUS5
+	selectProposalTemplateValue
+	@param templateName
+	void
+	Jun 24, 2022
+	*/
+	public void selectProposalTemplateValue(String templateName) {
+		try {
+			commonLib.waitForVisibilityOf("SF_Quote_Proposal_Template_Type_Dropdown_XPATH");
+			commonLib.performHoverandClick("SF_Quote_Proposal_Template_Type_Dropdown_XPATH");
+			Thread.sleep(2000);
+			commonLib.clickWithDynamicValue("SF_Quote_IDIN_Value_XPATH", templateName);
+			commonLib.waitForVisibilityOf("SF_Quote_Processing_Scroll_XPATH");
+			commonLib.waitForPageToLoad();
+			commonLib.getScreenshot();
+			commonLib.log(LogStatus.INFO, "Proposal Template Type: " + templateName + "  is selected");
+
+		} catch (InterruptedException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	/**SHANTANUS5
+	selectRadioButtonUnderProposal
+	@param radioButtonName
+	void
+	Jun 24, 2022
+	*/
+	public void selectRadioButtonUnderProposal(String radioButtonName) {
+		try {
+			commonLib.clickWithDynamicValue("SF_Quote_ProposalTab_RadioButton_XPATH", radioButtonName);
+			Thread.sleep(3000);
+			commonLib.getScreenshot();
+			commonLib.log(LogStatus.INFO, "Radio Button: " + radioButtonName + "  is selected");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**SHANTANUS5
+	clickOnChooseFileUnderAddionalAttachments
+	void
+	Jun 24, 2022
+	*/
+	public void clickOnChooseFileUnderAddionalAttachments() {
+		commonLib.waitForVisibilityOf("SF_Quote_Select_File_XPATH");
+		commonLib.clickbyjavascript("SF_Quote_Select_File_XPATH");
+		commonLib.waitForPageToLoad();
+		commonLib.getScreenshot();
+	}
+
+	/**SHANTANUS5
+	performPrintProposal
+	@throws IOException
+	@throws InterruptedException
+	void
+	Jun 24, 2022
+	*/
+	public void performPrintProposal() throws IOException, InterruptedException {
+		commonLib.waitForVisibilityOf("SF_Quote_Proposal_Print_Button_XPATH");
+		commonLib.getScreenshot();
+		commonLib.log(LogStatus.INFO, "Print Proposal button is displayed");
+		commonLib.click("SF_Quote_Proposal_Print_Button_XPATH");
+		commonLib.waitForVisibilityOf("SF_Quote_Processing_Scroll_XPATH");
+		Thread.sleep(2000);
+		commonLib.waitForPageToLoad();
+		commonLib.getScreenshot();
+		commonLib.click("SF_Quote_Proposal_Print_Confirm_Button_XPATH");
+		commonLib.log(LogStatus.PASS, "Proposal has been generated");
+	}
+	
+	/**SHANTANUS5
+	attachPDFToOpporunity
+	@throws IOException
+	@throws InterruptedException
+	void
+	Jun 24, 2022
+	*/
+	public void attachPDFToOpporunity() throws IOException, InterruptedException {
+		commonLib.waitForVisibilityOf("SF_Quote_Attach_PDF_Opportunity_XPATH");
+		commonLib.getScreenshot();
+		commonLib.log(LogStatus.INFO, "Attach PDF to Opporunity button is displayed");
+		commonLib.click("SF_Quote_Attach_PDF_Opportunity_XPATH");
+		commonLib.waitForVisibilityOf("SF_Quote_Processing_Scroll_XPATH");
+		commonLib.waitForPageToLoad();
+		commonLib.getScreenshot();
+		commonLib.log(LogStatus.INFO, "PDF is attached to Opportunity");
+	}
+	
+	/**SHANTANUS5
+	verifyProposalPDFGenerationUnderQuotesPage
+	void
+	Jun 24, 2022
+	*/
+	public void verifyProposalPDFGenerationUnderQuotesPage() {
+		try {
+			commonLib.scrollDownToElement("SF_Quotes_Header_Under_Oppty_XPATH", "span");
+			commonLib.assertThat(commonLib.waitForVisibilityOf("SF_Quote_Notes_And_Attachment_PDF_XPATH"),
+					"PDF file generated is attached and available under Notes & Attachments section",
+					"PDF file is not generated under Notes & Attachments section");
+			commonLib.scrollDownToElement("SF_Quote_Stage_History_Header_XPATH", "span");
+
+			Thread.sleep(2000);
+
+			commonLib.scrollDownToElement("SF_Quote_Divisonal_Opportunities_Header_XPATH", "span");
+			Thread.sleep(2000);
+			commonLib.scrollDownToElement("SF_Quote_Files_Header_XPATH", "span");
+			commonLib.assertThat(commonLib.waitForPresenceOfElementLocated("SF_Quote_Files_PDF_XPATH"),
+					"PDF file generated is attached and available under Files section",
+					"PDF file is not generated under Files section");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
